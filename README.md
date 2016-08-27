@@ -1,4 +1,4 @@
-# Visualisierung der DB-Wagenreiuhngspläne aus offenen Datensätzen (XML)
+# Visualisierung der DB-Wagenreihungspläne aus offenen Datensätzen im XML-Format
 
 Auf [http://data.deutschebahn.com](http://data.deutschebahn.com) stellt die Deutsche Bahn einige ihrer internen Datensätze als Open Data zur Verfügung. So zum Beispiel eine [xml-Datei, die die Daten zu den Wagenreihungsplänen](http://data.deutschebahn.com/dataset/data-wagenreihungsplan-soll-daten) enthält, die an vielen Fernverkehrsbahnhöfen hängen, wie z.B. dieser hier:
 
@@ -8,6 +8,8 @@ Mit [XSL (**EX**tensible **S**tylesheet **L**anguage)](http://www.w3schools.com/
 XML-Datei mittels eines Tamplates eine HTML-Seite generieren. Das habe ich in diesem Beispiel genutzt, um aus der XML-Datenbankstruktur eine Visualisierung des Wagenreihungsplans ganz im Stil der Deutschen Bahn zu generieren, der nach dem derzeitigen Stand so aussieht:
 
 ![DB-Wagenreihung-test](DB-Wagenreihung-test.png)
+
+Dieses Repository enthält einen Beispieldatensatz [BGS_2016-06-04_16-28-18.xml](https://github.com/nFrechen/DB-Wagenreihungsplan-XML-to-HTML/blob/master/BGS_2016-06-04_16-28-18.xml), der mit dem XSL-Stylesheet [wagenreihung.xsl](https://github.com/nFrechen/DB-Wagenreihungsplan-XML-to-HTML/blob/master/wagenreihung.xsl) im Browser in eine HTML-Datei umgewandelt wird, wie sie  [hier](http://n-dim.de/DB-Wagenreihungsplan-XML-to-HTML/BGS_2016-06-04_16-28-18.xml) zu sehen ist.
 
 ## Was noch zu ändern wäre:
 
