@@ -1,5 +1,7 @@
 # Visualisierung der DB-Wagenreihungspläne aus offenen Datensätzen im XML-Format
 
+### ➟ direkt zur [Demo](http://n-dim.de/DB-Wagenreihungsplan-XML-to-HTML/BGS_2016-06-04_16-28-18.xml)
+
 Auf [http://data.deutschebahn.com](http://data.deutschebahn.com) stellt die Deutsche Bahn einige ihrer internen Datensätze als Open Data zur Verfügung. So zum Beispiel eine [xml-Datei, die die Daten zu den Wagenreihungsplänen](http://data.deutschebahn.com/dataset/data-wagenreihungsplan-soll-daten) enthält, die an vielen Fernverkehrsbahnhöfen hängen, wie z.B. dieser hier:
 
 ![Visualisierung der Wagenreihungspläne](pic01.PNG)
