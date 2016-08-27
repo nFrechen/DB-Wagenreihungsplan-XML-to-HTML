@@ -1,0 +1,100 @@
+body{
+  font-family: 'Open Sans', 'Arial', 'Verdana', 'Sans Serif';
+}
+#header{
+}
+.track{
+  margin-top: 20px;
+}
+.track-name{
+  font-size: 120%;
+  font-weight: bold;
+  padding: 5px 0;
+}
+#station{
+  padding: 10px;
+}
+.traintimes{
+  width: 500px;
+}
+.traintime{
+  overflow: scroll;
+  width: auto;
+  white-space: nowrap;
+  height: 4em;
+  vertical-align: middle;
+}
+.traintime td{
+  padding: 5px;
+}
+.traintime:nth-child(even){
+  background: #eee;
+}
+
+.time{
+}
+.time::after{
+  content: '\00a0';
+}
+.trainNumbers::after{
+  content: '\00a0';
+}
+.trainNumber{
+  padding: 0 3px;
+}
+.waggon{
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  background: green;
+  padding: 2px 2px;
+  margin: 2px;
+  width: 50px;
+  height: 20px;
+}
+.waggon-type{
+  color: white;
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 4px;
+  vertical-align: super;
+  font-size: 70%;
+}
+.ICE-Lok{
+  background-color: transparent;
+  background-image: url("Piktogramme/ICE-Lok.png");
+  background-size:  100% auto;
+  background-repeat: no-repeat;
+  vertical-align: bottom;
+}
+.IC-Lok{
+  background-color: transparent;
+  background-image: url("Piktogramme/IC-Lok.png");
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  vertical-align: bottom;
+}
+.Triebwagen{
+  background-color: transparent;
+  width: 25px;
+  background-image: url("Piktogramme/Triebwagen.png");
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  vertical-align: bottom;
+}
+.bistro{
+  background: orange;
+}
+.erste{
+  background: red;
+}
+.zweite{
+
+}
+.wagon-section{
+  position: absolute;
+  top: -1.3em;
+  left: 0;
+  width: 100%;
+}
