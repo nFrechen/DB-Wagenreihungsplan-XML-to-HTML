@@ -62,3 +62,5 @@ Die Piktogramme von Loks und Steuerwagen und andere Piktogramme sollten am beste
 ## Updates
 Mittlerweile bieted die Bahn in ihrer App
 [DB Navigator](https://www.bahn.de/p/view/service/buchung/wagenreihung.shtml) eine Visualisierung der Wagenreihung an. Die Anzeige ist dann auch mit dem gebuchten Ticket verbunden und leitet einen direkt an die richtige Stelle. Anscheinend wird sie auch aktualisiert, wenn die Wagenreihung spontan geändert wird. Das ist natürlich sehr praktisch!
+
+Allerdings werden [bisher nur ICE Züge in der App](https://community.bahn.de/questions/1297179-wagenreihung) angezeigt. Von daher lohnt es sich immer noch, eine eigene Visualisierung aufzubauen!
