@@ -23,7 +23,7 @@ Beim originalen Wagenstandanzeiger sieht noch einiges anders aus. Die Züge sind
 
 Die Ausrichtung der Piktogramme wie in der Grafik der DB fiel mir jedoch schwer, da die Daten verschiedene Abschnittszordnungen zu den Waggons enthalten. Manche enthalten ein Muster wie z.B. A, AB, B, BC, C. An anderen Bahnsteigen ist dies aber so notiert: A, A, B, B, C, C. Es kommt auch vor, dass im Abschnitt A vier Waggons stehen, oder aber im Abschnitt G am anderen Ende des Bahnsteigs. Hier steht der Zug wahrscheinlich länger vorne oder hinten weg, als die Markierten Abschnitte hergeben.
 
-Eine Methode zur Ausrichtung Zug-Piktogramme muss also noch gefunden werden.
+Eine Methode zur Ausrichtung der Zug-Piktogramme muss also noch gefunden werden.
 
 ### Weitere Steuerwagen und Lok-Typen
 
@@ -52,8 +52,13 @@ Dies müsste noch implementiert werden.
 ...wie z.B. Rollstuhlgerecht, Kinderabteil etc. könnten noch dargestellt werden.
 
 ### Gleis 99
-In vielen Datensätzen gibt es ein "Gleis 99" oder ähnlich, dass es in wahrheit gar nicht gibt. Dort sind Muster für bestimmte Zugtypen gespeichert oder stehen irgend welche Überbleibsel. Diese müsste man aus der Darstellung heraus filtern.
+In vielen Datensätzen gibt es ein "Gleis 99" oder ähnlich, dass es in Wahrheit gar nicht gibt. Dort sind Muster für bestimmte Zugtypen gespeichert oder stehen irgend welche Überbleibsel. Diese müsste man aus der Darstellung heraus filtern.
 
 ### SVG-Grafiken
 Die Piktogramme von Loks und Steuerwagen und andere Piktogramme sollten am besten SVG-Grafiken sein.
 
+----------------
+
+## Updates
+Mittlerweile bieted die Bahn in ihrer App
+[DB Navigator](https://www.bahn.de/p/view/service/buchung/wagenreihung.shtml) eine Visualisierung der Wagenreihung an. Die Anzeige ist dann auch mit dem gebuchten Ticket verbunden und leitet einen direkt an die richtige Stelle. Anscheinend wird sie auch aktualisiert, wenn die Wagenreihung spontan geändert wird. Das ist natürlich sehr praktisch!
