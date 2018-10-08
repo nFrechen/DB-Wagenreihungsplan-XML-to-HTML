@@ -3,6 +3,16 @@
 <xsl:stylesheet version="1.0"
 xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
+
+<xsl:template match="time">
+  <!-- remove seconds part if zero -->
+  <xsl:choose>
+    <xsl:when test="string-length(.) = 8 and substring(., 6) = ':00'"><xsl:value-of select="substring(., 1, 5)"/></xsl:when>
+    <xsl:otherwise><xsl:value-of select="."/></xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+
+
 <xsl:template match="/">
   <html>
     <head>
@@ -27,7 +37,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
           </tr>
           <xsl:for-each select="trains/train">
             <tr class="traintime">
-              <td class="time"><xsl:value-of select="time"/></td>
+              <td class="time"><xsl:apply-templates select="time"/></td>
               <!--<span class="additionalText"><xsl:value-of select="additionalText"/></span>-->
               <td>
                 <span class="traintype"><xsl:value-of select="traintypes/traintype"/> </span>
