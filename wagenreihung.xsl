@@ -30,7 +30,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
     </head>
   <body>
     <div id="header">
-      <h2>Wagenreihung <xsl:value-of select="station/name"/></h2>
+      <h2>Wagenreihung <xsl:value-of select="station/name"/> (DS100: <xsl:value-of select="station/shortcode"/>)</h2>
       <p>Gültig vom <xsl:value-of select="station/validity/from"/> bis <xsl:value-of select="station/validity/to"/>. Datenquelle: <a href="http://data.deutschebahn.com/dataset/data-wagenreihungsplan-soll-daten">data.deutschebahn.com</a>.</p>
     </div>
     <div id="station">
