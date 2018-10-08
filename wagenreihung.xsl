@@ -64,12 +64,12 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
     <td class="time"><xsl:apply-templates select="time"/></td>
     <!--<span class="additionalText"><xsl:value-of select="additionalText"/></span>-->
     <td>
-      <span class="traintype"><xsl:value-of select="traintypes/traintype"/></span>
-      <span class="trainNumbers">
-        <span class="trainNumber">
-          <xsl:apply-templates select="trainNumbers/trainNumber"/>
-        </span>
-      </span>
+      <xsl:for-each select="traintypes/traintype">
+        <xsl:variable name="pos" select="position()"/>
+        <span class="traintype"><xsl:apply-templates select="."/></span>
+        <span class="trainNumber"><xsl:apply-templates select="../../trainNumbers/trainNumber[$pos]"/></span>
+        <xsl:if test="position() != last()"><br/></xsl:if>
+      </xsl:for-each>
     </td>
     <td class="train">
       <xsl:apply-templates select="waggons/waggon"/>

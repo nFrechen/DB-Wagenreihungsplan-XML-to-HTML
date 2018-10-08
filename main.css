@@ -36,7 +36,7 @@ body{
 .time::after{
   content: '\00a0';
 }
-.trainNumbers::after{
+.trainNumber::after{
   content: '\00a0';
 }
 .trainNumber{
