@@ -84,7 +84,10 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
     
     <xsl:attribute name="class">
       <xsl:text>waggon </xsl:text>
-      <xsl:apply-templates select="sections/identifier"/>
+      <xsl:for-each select="sections/identifier">
+        <xsl:apply-templates select="."/>
+        <xsl:if test="position() != last()"><xsl:text> </xsl:text></xsl:if>
+      </xsl:for-each>
       <xsl:choose>
         <xsl:when test="type = 'b'">
           <xsl:text> bistro</xsl:text>
@@ -115,7 +118,10 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
     <span class="waggon-number"><xsl:value-of select="number"/></span>
     <span class="waggon-type"><xsl:value-of select="type"/></span>
     <span class="wagon-section">
-      <xsl:apply-templates select="sections/identifier"/>
+      <xsl:for-each select="sections/identifier">
+        <xsl:apply-templates select="."/>
+        <xsl:if test="position() != last()">/</xsl:if>
+      </xsl:for-each>
     </span>
   </span>
 </xsl:template>
