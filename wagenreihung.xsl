@@ -13,6 +13,17 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 </xsl:template>
 
 
+<xsl:template match="identifier">
+  <xsl:value-of select="."/>
+</xsl:template>
+
+
+<xsl:template match="trainNumber">
+  <xsl:value-of select="."/>
+</xsl:template>
+
+
+
 <xsl:template match="/">
   <html>
     <head>
@@ -40,11 +51,11 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
               <td class="time"><xsl:apply-templates select="time"/></td>
               <!--<span class="additionalText"><xsl:value-of select="additionalText"/></span>-->
               <td>
-                <span class="traintype"><xsl:value-of select="traintypes/traintype"/> </span>
+                <span class="traintype"><xsl:value-of select="traintypes/traintype"/></span>
                 <span class="trainNumbers">
-                <xsl:for-each select="trainNumbers/trainNumber">
-                  <span class="trainNumber"><xsl:value-of select="."/></span>
-                </xsl:for-each>
+                  <span class="trainNumber">
+                    <xsl:apply-templates select="trainNumbers/trainNumber"/>
+                  </span>
                 </span>
               </td>
               <td class="train">
@@ -53,9 +64,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
                     <xsl:attribute name="class">
                       <xsl:text>waggon </xsl:text>
-                      <xsl:for-each select="sections/identifier">
-                        <xsl:value-of select="."/>
-                      </xsl:for-each>
+                      <xsl:apply-templates select="sections/identifier"/>
                       <xsl:choose>
                         <xsl:when test="type = 'b'">
                           <xsl:text> bistro</xsl:text>
@@ -86,9 +95,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
                     <span class="waggon-number"><xsl:value-of select="number"/></span>
                     <span class="waggon-type"><xsl:value-of select="type"/></span>
                     <span class="wagon-section">
-                      <xsl:for-each select="sections/identifier">
-                        <xsl:value-of select="."/>
-                      </xsl:for-each>
+                      <xsl:apply-templates select="sections/identifier"/>
                     </span>
                   </span>
 
