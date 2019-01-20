@@ -1,0 +1,2090 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Wagenreihung</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="main.css" type="text/css" />
+  <script src="loadXML.js"></script>
+
+
+  <!-- aktiviere datatable -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+  <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+  <script>
+    $(document).ready( function () {
+      $('#Bahnhöfe table').DataTable();
+    } );
+  </script>
+</head>
+
+<body>
+<div class="container-fluid main-container">
+  <p><a id="back-to-overview" onclick="hide_wgr()" style="display:none;">&lt;&lt; Zurück zur Übersicht</a></p>
+
+  <!-- Hier wird die Wagenreihung angezeigt -->
+  <div id="Wagenreihung"></div>
+
+  <!-- Übersichtstabelle aller Bahnhöfe -->
+  <div id="Bahnhöfe">
+    <h1>Übersicht Bahnhöfe</h1>
+    <p>Datenquelle: <a href="https://data.deutschebahn.com/dataset/data-stationsdaten", target="_blank">data.deutschebahn.com/dataset/data-stationsdaten</a></p>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Bundesland</th>
+          <th>BM</th>
+          <th>Bf. Nr.</th>
+          <th>Station</th>
+          <th>Bf DS 100 Abk.</th>
+          <th>Kat. Vst</th>
+          <th>Straße</th>
+          <th>PLZ</th>
+          <th>Ort</th>
+          <th>Aufgabenträger</th>
+          <th>Wagenreihung (Link)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Hamburg</td>
+          <td>Hamburg</td>
+          <td>2517</td>
+          <td>Hamburg-Altona</td>
+          <td>AA</td>
+          <td>1</td>
+          <td>Scheel-Plessen-Str. 17</td>
+          <td>22765</td>
+          <td>Hamburg</td>
+          <td>Hamburger Verkehrsverbund GmbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/AA_2016-06-10_11-32-31.xml')">AA_2016-06-10_11-32-31.xml</a></td>
+        </tr>
+        <tr>
+          <td>Niedersachsen</td>
+          <td>Braunschweig</td>
+          <td>253</td>
+          <td>Bad Bevensen</td>
+          <td>ABVS</td>
+          <td>5</td>
+          <td>Am Bahnhof 1</td>
+          <td>29549</td>
+          <td>Bad Bevensen</td>
+          <td>Landesnahverkehrsgesellschaft Niedersachsen mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/ABVS_2016-05-30_13-19-25.xml')">ABVS_2016-05-30_13-19-25.xml</a></td>
+        </tr>
+        <tr>
+          <td>Hamburg</td>
+          <td>Hamburg</td>
+          <td>2513</td>
+          <td>Hamburg Dammtor</td>
+          <td>ADF</td>
+          <td>2</td>
+          <td>Dag-Hammarskjöld-Platz 15</td>
+          <td>20354</td>
+          <td>Hamburg</td>
+          <td>Hamburger Verkehrsverbund GmbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/ADF_2016-05-24_14-24-54.xml')">ADF_2016-05-24_14-24-54.xml</a></td>
+        </tr>
+        <tr>
+          <td>Schleswig-Holstein</td>
+          <td>Schleswig-Holstein</td>
+          <td>1810</td>
+          <td>Flensburg</td>
+          <td>AF</td>
+          <td>3</td>
+          <td>Am Bundesbahnhof 5</td>
+          <td>24937</td>
+          <td>Flensburg</td>
+          <td>LVS Schleswig-Holstein Landesweite Verkehrsservicegesellschaft mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/AF_2016-03-02_12-59-58.xml')">AF_2016-03-02_12-59-58.xml</a></td>
+        </tr>
+        <tr>
+          <td>Hamburg</td>
+          <td>Hamburg</td>
+          <td>2514</td>
+          <td>Hamburg Hbf</td>
+          <td>AH</td>
+          <td>1</td>
+          <td>Hachmannplatz 16</td>
+          <td>20099</td>
+          <td>Hamburg</td>
+          <td>Hamburger Verkehrsverbund GmbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/AH_2016-06-17_11-18-59.xml')">AH_2016-06-17_11-18-59.xml</a></td>
+        </tr>
+        <tr>
+          <td>Hamburg</td>
+          <td>Hamburg</td>
+          <td>2519</td>
+          <td>Hamburg-Harburg</td>
+          <td>AHAR</td>
+          <td>2</td>
+          <td>Hannoversche Str. 85</td>
+          <td>21079</td>
+          <td>Hamburg</td>
+          <td>Hamburger Verkehrsverbund GmbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/AHAR_2016-05-30_15-57-51.xml')">AHAR_2016-05-30_15-57-51.xml</a></td>
+        </tr>
+        <tr>
+          <td>Schleswig-Holstein</td>
+          <td>Schleswig-Holstein</td>
+          <td>2625</td>
+          <td>Heide (Holst)</td>
+          <td>AHI</td>
+          <td>3</td>
+          <td>Güterstraße 13</td>
+          <td>25746</td>
+          <td>Heide</td>
+          <td>LVS Schleswig-Holstein Landesweite Verkehrsservicegesellschaft mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/AHI_2016-05-19_11-49-20.xml')">AHI_2016-05-19_11-49-20.xml</a></td>
+        </tr>
+        <tr>
+          <td>Schleswig-Holstein</td>
+          <td>Schleswig-Holstein</td>
+          <td>2953</td>
+          <td>Husum</td>
+          <td>AHM</td>
+          <td>3</td>
+          <td>Poggenburgstr. 12</td>
+          <td>25813</td>
+          <td>Husum</td>
+          <td>LVS Schleswig-Holstein Landesweite Verkehrsservicegesellschaft mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/AHM_2016-05-19_11-45-37.xml')">AHM_2016-05-19_11-45-37.xml</a></td>
+        </tr>
+        <tr>
+          <td>Schleswig-Holstein</td>
+          <td>Schleswig-Holstein</td>
+          <td>3016</td>
+          <td>Itzehoe</td>
+          <td>AIZ</td>
+          <td>3</td>
+          <td>Bahnhofstr. 32</td>
+          <td>25524</td>
+          <td>Itzehoe</td>
+          <td>LVS Schleswig-Holstein Landesweite Verkehrsservicegesellschaft mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/AIZ_2016-05-19_11-47-43.xml')">AIZ_2016-05-19_11-47-43.xml</a></td>
+        </tr>
+        <tr>
+          <td>Schleswig-Holstein</td>
+          <td>Schleswig-Holstein</td>
+          <td>3174</td>
+          <td>Kiel Hbf</td>
+          <td>AK</td>
+          <td>2</td>
+          <td>Sophienblatt 25-27</td>
+          <td>24114</td>
+          <td>Kiel</td>
+          <td>LVS Schleswig-Holstein Landesweite Verkehrsservicegesellschaft mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/AK_2016-05-19_14-38-55.xml')">AK_2016-05-19_14-38-55.xml</a></td>
+        </tr>
+        <tr>
+          <td>Niedersachsen</td>
+          <td>Hamburg</td>
+          <td>3855</td>
+          <td>Lüneburg</td>
+          <td>ALBG</td>
+          <td>2</td>
+          <td>Bahnhofstr. 10</td>
+          <td>21337</td>
+          <td>Lüneburg</td>
+          <td>Landesnahverkehrsgesellschaft Niedersachsen mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/ALBG_2016-05-26_10-57-27.xml')">ALBG_2016-05-26_10-57-27.xml</a></td>
+        </tr>
+        <tr>
+          <td>Schleswig-Holstein</td>
+          <td>Schleswig-Holstein</td>
+          <td>4420</td>
+          <td>Neumünster</td>
+          <td>AN</td>
+          <td>2</td>
+          <td>Konrad-Adenauer-Platz 2</td>
+          <td>24534</td>
+          <td>Neumünster</td>
+          <td>LVS Schleswig-Holstein Landesweite Verkehrsservicegesellschaft mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/AN_2016-05-19_14-34-56.xml')">AN_2016-05-19_14-34-56.xml</a></td>
+        </tr>
+        <tr>
+          <td>Schleswig-Holstein</td>
+          <td>Schleswig-Holstein</td>
+          <td>4472</td>
+          <td>Niebüll</td>
+          <td>ANB</td>
+          <td>3</td>
+          <td>Bahnhofstr. 1</td>
+          <td>25899</td>
+          <td>Niebüll</td>
+          <td>LVS Schleswig-Holstein Landesweite Verkehrsservicegesellschaft mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/ANB_2016-05-19_11-41-06.xml')">ANB_2016-05-19_11-41-06.xml</a></td>
+        </tr>
+        <tr>
+          <td>Schleswig-Holstein</td>
+          <td>Schleswig-Holstein</td>
+          <td>6714</td>
+          <td>Westerland (Sylt)</td>
+          <td>AWLA</td>
+          <td>3</td>
+          <td>Kirchenweg 1</td>
+          <td>25980</td>
+          <td>Sylt/ OT Westerland</td>
+          <td>LVS Schleswig-Holstein Landesweite Verkehrsservicegesellschaft mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/AWLA_2016-05-19_11-43-23.xml')">AWLA_2016-05-19_11-43-23.xml</a></td>
+        </tr>
+        <tr>
+          <td>Brandenburg</td>
+          <td>Frankfurt (Oder)</td>
+          <td>571</td>
+          <td>Bernau (b Berlin)</td>
+          <td>BBRN</td>
+          <td>3</td>
+          <td>Bahnhofsplatz 1</td>
+          <td>16321</td>
+          <td>Bernau bei Berlin</td>
+          <td>Verkehrsverbund Berlin-Brandenburg GmbH für Brandenburg</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/BBRN_2016-06-08_20-01-06.xml')">BBRN_2016-06-08_20-01-06.xml</a></td>
+        </tr>
+        <tr>
+          <td>Brandenburg</td>
+          <td>Cottbus</td>
+          <td>1569</td>
+          <td>Elsterwerda</td>
+          <td>BEW</td>
+          <td>4</td>
+          <td>Am Bahnhof 1</td>
+          <td>04910</td>
+          <td>Elsterwerda</td>
+          <td>Verkehrsverbund Berlin-Brandenburg GmbH für Brandenburg</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/BEW_2016-05-10_12-40-04.xml')">BEW_2016-05-10_12-40-04.xml</a></td>
+        </tr>
+        <tr>
+          <td>Brandenburg</td>
+          <td>Frankfurt (Oder)</td>
+          <td>1859</td>
+          <td>Frankfurt (Oder)</td>
+          <td>BFP</td>
+          <td>2</td>
+          <td>Bahnhofsplatz 11</td>
+          <td>15230</td>
+          <td>Frankfurt (Oder)</td>
+          <td>Verkehrsverbund Berlin-Brandenburg GmbH für Brandenburg</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/BFP_2016-06-06_14-47-43.xml')">BFP_2016-06-06_14-47-43.xml</a></td>
+        </tr>
+        <tr>
+          <td>Berlin</td>
+          <td>Berlin</td>
+          <td>528</td>
+          <td>Berlin-Gesundbrunnen</td>
+          <td>BGS</td>
+          <td>1</td>
+          <td>Badstr.1-3</td>
+          <td>13357</td>
+          <td>Berlin</td>
+          <td>Verkehrsverbund Berlin-Brandenburg GmbH für Berlin</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/BGS_2016-06-04_16-28-18.xml')">BGS_2016-06-04_16-28-18.xml</a></td>
+        </tr>
+        <tr>
+          <td>Berlin</td>
+          <td>Berlin</td>
+          <td>530</td>
+          <td>Berlin Ostbahnhof</td>
+          <td>BHF</td>
+          <td>1</td>
+          <td>Koppenstr. 3</td>
+          <td>10243</td>
+          <td>Berlin</td>
+          <td>Verkehrsverbund Berlin-Brandenburg GmbH für Berlin</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/BHF_2016-06-04_13-19-57.xml')">BHF_2016-06-04_13-19-57.xml</a></td>
+        </tr>
+        <tr>
+          <td>NA</td>
+          <td>NA</td>
+          <td>NA</td>
+          <td>NA</td>
+          <td>BL</td>
+          <td>NA</td>
+          <td>NA</td>
+          <td>NA</td>
+          <td>NA</td>
+          <td>NA</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/BL_2016-06-07_19-00-10.xml')">BL_2016-06-07_19-00-10.xml</a></td>
+        </tr>
+        <tr>
+          <td>Brandenburg</td>
+          <td>Cottbus</td>
+          <td>3802</td>
+          <td>Lübben (Spreewald)</td>
+          <td>BLB</td>
+          <td>4</td>
+          <td>Bahnhofstr. 1</td>
+          <td>15907</td>
+          <td>Lübben</td>
+          <td>Verkehrsverbund Berlin-Brandenburg GmbH für Brandenburg</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/BLB_2016-03-23_11-20-36.xml')">BLB_2016-03-23_11-20-36.xml</a></td>
+        </tr>
+        <tr>
+          <td>Brandenburg</td>
+          <td>Cottbus</td>
+          <td>3805</td>
+          <td>Lübbenau (Spreewald)</td>
+          <td>BLN</td>
+          <td>4</td>
+          <td>Bahnhofstr. 3a</td>
+          <td>03222</td>
+          <td>Lübbenau</td>
+          <td>Verkehrsverbund Berlin-Brandenburg GmbH für Brandenburg</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/BLN_2016-03-23_10-41-14.xml')">BLN_2016-03-23_10-41-14.xml</a></td>
+        </tr>
+        <tr>
+          <td>Berlin</td>
+          <td>Berlin</td>
+          <td>549</td>
+          <td>Berlin-Lichtenberg</td>
+          <td>BLO</td>
+          <td>2</td>
+          <td>Weitlingstr. 22</td>
+          <td>10317</td>
+          <td>Berlin</td>
+          <td>Verkehrsverbund Berlin-Brandenburg GmbH für Berlin</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/BLO_2016-06-04_10-39-54.xml')">BLO_2016-06-04_10-39-54.xml</a></td>
+        </tr>
+        <tr>
+          <td>NA</td>
+          <td>NA</td>
+          <td>NA</td>
+          <td>NA</td>
+          <td>BLS</td>
+          <td>NA</td>
+          <td>NA</td>
+          <td>NA</td>
+          <td>NA</td>
+          <td>NA</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/BLS_2016-06-04_17-42-26.xml')">BLS_2016-06-04_17-42-26.xml</a></td>
+        </tr>
+        <tr>
+          <td>NA</td>
+          <td>NA</td>
+          <td>NA</td>
+          <td>NA</td>
+          <td>BPAF</td>
+          <td>NA</td>
+          <td>NA</td>
+          <td>NA</td>
+          <td>NA</td>
+          <td>NA</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/BPAF_2016-06-06_15-20-03.xml')">BPAF_2016-06-06_15-20-03.xml</a></td>
+        </tr>
+        <tr>
+          <td>Brandenburg</td>
+          <td>Potsdam</td>
+          <td>5012</td>
+          <td>Potsdam Hbf</td>
+          <td>BPD</td>
+          <td>2</td>
+          <td>Friedrich-Engels-Str. 99</td>
+          <td>14473</td>
+          <td>Potsdam</td>
+          <td>Verkehrsverbund Berlin-Brandenburg GmbH für Brandenburg</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/BPD_2016-06-07_12-32-53.xml')">BPD_2016-06-07_12-32-53.xml</a></td>
+        </tr>
+        <tr>
+          <td>Berlin</td>
+          <td>Berlin</td>
+          <td>561</td>
+          <td>Berlin-Spandau</td>
+          <td>BSPD</td>
+          <td>2</td>
+          <td>Seegefelder Str. 1</td>
+          <td>13597</td>
+          <td>Berlin</td>
+          <td>Verkehrsverbund Berlin-Brandenburg GmbH für Berlin</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/BSPD_2016-06-07_11-43-03.xml')">BSPD_2016-06-07_11-43-03.xml</a></td>
+        </tr>
+        <tr>
+          <td>Berlin</td>
+          <td>Berlin</td>
+          <td>566</td>
+          <td>Berlin-Wannsee</td>
+          <td>BWS</td>
+          <td>2</td>
+          <td>Kronprinzessinnenweg 250</td>
+          <td>14109</td>
+          <td>Berlin</td>
+          <td>Verkehrsverbund Berlin-Brandenburg GmbH für Berlin</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/BWS_2016-06-04_13-30-14.xml')">BWS_2016-06-04_13-30-14.xml</a></td>
+        </tr>
+        <tr>
+          <td>Sachsen</td>
+          <td>Dresden</td>
+          <td>1343</td>
+          <td>Dresden Hbf</td>
+          <td>DH</td>
+          <td>1</td>
+          <td>Wiener Platz 4</td>
+          <td>01069</td>
+          <td>Dresden</td>
+          <td>Verkehrsbund Oberelbe GmbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/DH_2016-06-03_14-10-33.xml')">DH_2016-06-03_14-10-33.xml</a></td>
+        </tr>
+        <tr>
+          <td>Nordrhein-Westfalen</td>
+          <td>Bielefeld</td>
+          <td>622</td>
+          <td>Bielefeld Hbf</td>
+          <td>EBIL</td>
+          <td>2</td>
+          <td>Am Bahnhof 1b</td>
+          <td>33602</td>
+          <td>Bielefeld</td>
+          <td>Zweckverband Nahverkehr Westfalen-Lippe</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/EBIL_2016-06-02_09-03-05.xml')">EBIL_2016-06-02_09-03-05.xml</a></td>
+        </tr>
+        <tr>
+          <td>Nordrhein-Westfalen</td>
+          <td>Duisburg</td>
+          <td>1374</td>
+          <td>Duisburg Hbf</td>
+          <td>EDG</td>
+          <td>1</td>
+          <td>Mercatorstr. 17</td>
+          <td>47051</td>
+          <td>Duisburg</td>
+          <td>Zweckverband Verkehrsverbund Rhein-Ruhr AöR</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/EDG_2016-06-13_11-35-09.xml')">EDG_2016-06-13_11-35-09.xml</a></td>
+        </tr>
+        <tr>
+          <td>Nordrhein-Westfalen</td>
+          <td>Dortmund</td>
+          <td>1289</td>
+          <td>Dortmund Hbf</td>
+          <td>EDO</td>
+          <td>1</td>
+          <td>Königswall 15</td>
+          <td>44137</td>
+          <td>Dortmund</td>
+          <td>Zweckverband Verkehrsverbund Rhein-Ruhr AöR</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/EDO_2016-06-08_08-22-45.xml')">EDO_2016-06-08_08-22-45.xml</a></td>
+        </tr>
+        <tr>
+          <td>Nordrhein-Westfalen</td>
+          <td>Essen</td>
+          <td>1690</td>
+          <td>Essen Hbf</td>
+          <td>EE</td>
+          <td>1</td>
+          <td>Am Hauptbahnhof 5</td>
+          <td>45127</td>
+          <td>Essen</td>
+          <td>Zweckverband Verkehrsverbund Rhein-Ruhr AöR</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/EE_2016-06-10_12-53-12.xml')">EE_2016-06-10_12-53-12.xml</a></td>
+        </tr>
+        <tr>
+          <td>Nordrhein-Westfalen</td>
+          <td>Essen</td>
+          <td>2052</td>
+          <td>Gelsenkirchen Hbf</td>
+          <td>EG</td>
+          <td>2</td>
+          <td>Bahnhofsvorplatz 10</td>
+          <td>45879</td>
+          <td>Gelsenkirchen</td>
+          <td>Zweckverband Verkehrsverbund Rhein-Ruhr AöR</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/EG_2016-06-01_13-31-34.xml')">EG_2016-06-01_13-31-34.xml</a></td>
+        </tr>
+        <tr>
+          <td>Nordrhein-Westfalen</td>
+          <td>Bielefeld</td>
+          <td>2438</td>
+          <td>Gütersloh Hbf</td>
+          <td>EGLO</td>
+          <td>3</td>
+          <td>Willy-Brandt-Platz 2</td>
+          <td>33330</td>
+          <td>Gütersloh</td>
+          <td>Zweckverband Nahverkehr Westfalen-Lippe</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/EGLO_2016-06-03_10-55-53.xml')">EGLO_2016-06-03_10-55-53.xml</a></td>
+        </tr>
+        <tr>
+          <td>Nordrhein-Westfalen</td>
+          <td>Bielefeld</td>
+          <td>2708</td>
+          <td>Herford</td>
+          <td>EHFD</td>
+          <td>2</td>
+          <td>Bahnhofsplatz 3</td>
+          <td>32052</td>
+          <td>Herford</td>
+          <td>Zweckverband Nahverkehr Westfalen-Lippe</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/EHFD_2016-06-06_10-50-38.xml')">EHFD_2016-06-06_10-50-38.xml</a></td>
+        </tr>
+        <tr>
+          <td>Nordrhein-Westfalen</td>
+          <td>Dortmund</td>
+          <td>2528</td>
+          <td>Hamm (Westf)</td>
+          <td>EHM</td>
+          <td>2</td>
+          <td>Willy-Brandt-Platz 1b</td>
+          <td>59065</td>
+          <td>Hamm</td>
+          <td>Zweckverband Nahverkehr Westfalen-Lippe</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/EHM_2016-05-31_07-42-29.xml')">EHM_2016-05-31_07-42-29.xml</a></td>
+        </tr>
+        <tr>
+          <td>Nordrhein-Westfalen</td>
+          <td>Dortmund</td>
+          <td>3746</td>
+          <td>Lippstadt</td>
+          <td>ELPP</td>
+          <td>4</td>
+          <td>Rixbeckerstr. 2</td>
+          <td>59555</td>
+          <td>Lippstadt</td>
+          <td>Zweckverband Nahverkehr Westfalen-Lippe</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/ELPP_2016-05-31_11-07-48.xml')">ELPP_2016-05-31_11-07-48.xml</a></td>
+        </tr>
+        <tr>
+          <td>Nordrhein-Westfalen</td>
+          <td>Duisburg</td>
+          <td>4219</td>
+          <td>Mülheim (Ruhr) Hbf</td>
+          <td>EMLR</td>
+          <td>3</td>
+          <td>Dieter aus dem Siepen Platz 3</td>
+          <td>45468</td>
+          <td>Mülheim an der Ruhr</td>
+          <td>Zweckverband Verkehrsverbund Rhein-Ruhr AöR</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/EMLR_2016-06-09_12-01-54.xml')">EMLR_2016-06-09_12-01-54.xml</a></td>
+        </tr>
+        <tr>
+          <td>Nordrhein-Westfalen</td>
+          <td>Münster (Westf)</td>
+          <td>4280</td>
+          <td>Münster (Westf) Hbf</td>
+          <td>EMST</td>
+          <td>2</td>
+          <td>Berliner Platz 8-10</td>
+          <td>48143</td>
+          <td>Münster</td>
+          <td>Zweckverband Nahverkehr Westfalen-Lippe</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/EMST_2016-06-03_12-44-18.xml')">EMST_2016-06-03_12-44-18.xml</a></td>
+        </tr>
+        <tr>
+          <td>Nordrhein-Westfalen</td>
+          <td>Duisburg</td>
+          <td>4648</td>
+          <td>Oberhausen Hbf</td>
+          <td>EOB</td>
+          <td>2</td>
+          <td>Willy-Brandt-Platz 1</td>
+          <td>46045</td>
+          <td>Oberhausen</td>
+          <td>Zweckverband Verkehrsverbund Rhein-Ruhr AöR</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/EOB_2016-05-12_13-08-54.xml')">EOB_2016-05-12_13-08-54.xml</a></td>
+        </tr>
+        <tr>
+          <td>Nordrhein-Westfalen</td>
+          <td>Münster (Westf)</td>
+          <td>5160</td>
+          <td>Recklinghausen Hbf</td>
+          <td>ERE</td>
+          <td>3</td>
+          <td>Große Perdekamp Str. 2</td>
+          <td>45657</td>
+          <td>Recklinghausen</td>
+          <td>Zweckverband Verkehrsverbund Rhein-Ruhr AöR</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/ERE_2016-06-06_11-24-40.xml')">ERE_2016-06-06_11-24-40.xml</a></td>
+        </tr>
+        <tr>
+          <td>Nordrhein-Westfalen</td>
+          <td>Dortmund</td>
+          <td>5876</td>
+          <td>Soest</td>
+          <td>ESOT</td>
+          <td>3</td>
+          <td>Bahnhofstr. 2</td>
+          <td>59494</td>
+          <td>Soest</td>
+          <td>Zweckverband Nahverkehr Westfalen-Lippe</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/ESOT_2016-05-30_09-29-14.xml')">ESOT_2016-05-30_09-29-14.xml</a></td>
+        </tr>
+        <tr>
+          <td>Nordrhein-Westfalen</td>
+          <td>Essen</td>
+          <td>6533</td>
+          <td>Wanne-Eickel Hbf</td>
+          <td>EWAN</td>
+          <td>3</td>
+          <td>Heinz-Rühmann-Platz 1</td>
+          <td>44649</td>
+          <td>Herne</td>
+          <td>Zweckverband Verkehrsverbund Rhein-Ruhr AöR</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/EWAN_2016-03-14_11-01-32.xml')">EWAN_2016-03-14_11-01-32.xml</a></td>
+        </tr>
+        <tr>
+          <td>Hessen</td>
+          <td>Kassel</td>
+          <td>443</td>
+          <td>Bebra</td>
+          <td>FB</td>
+          <td>3</td>
+          <td>Bahnhofstraße 10</td>
+          <td>36179</td>
+          <td>Bebra</td>
+          <td>Nordhessischer VerkehrsVerbund mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/FB_2016-05-25_13-37-11.xml')">FB_2016-05-25_13-37-11.xml</a></td>
+        </tr>
+        <tr>
+          <td>Hessen</td>
+          <td>Kassel</td>
+          <td>282</td>
+          <td>Bad Hersfeld</td>
+          <td>FBHF</td>
+          <td>3</td>
+          <td>Bahnhofstr. 16</td>
+          <td>36251</td>
+          <td>Bad Hersfeld</td>
+          <td>Nordhessischer VerkehrsVerbund mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/FBHF_2016-05-25_13-40-58.xml')">FBHF_2016-05-25_13-40-58.xml</a></td>
+        </tr>
+        <tr>
+          <td>Hessen</td>
+          <td>Frankfurt a. M.</td>
+          <td>1866</td>
+          <td>Frankfurt (Main) Hbf</td>
+          <td>FF</td>
+          <td>1</td>
+          <td>Im Hauptbahnhof</td>
+          <td>60329</td>
+          <td>Frankfurt am Main</td>
+          <td>Rhein-Main-Verkehrsverbund GmbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/FF_2016-06-10_10-03-56.xml')">FF_2016-06-10_10-03-56.xml</a></td>
+        </tr>
+        <tr>
+          <td>Hessen</td>
+          <td>Frankfurt a. M.</td>
+          <td>7982</td>
+          <td>Frankfurt am Main Flughafen Fernbahnhof</td>
+          <td>FFLF</td>
+          <td>3</td>
+          <td>Hugo-Eckener-Ring 1</td>
+          <td>60549</td>
+          <td>Frankfurt am Main</td>
+          <td>Rhein-Main-Verkehrsverbund GmbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/FFLF_2016-06-07_16-47-31.xml')">FFLF_2016-06-07_16-47-31.xml</a></td>
+        </tr>
+        <tr>
+          <td>Hessen</td>
+          <td>Frankfurt a. M.</td>
+          <td>1856</td>
+          <td>Frankfurt (Main) Süd</td>
+          <td>FFS</td>
+          <td>2</td>
+          <td>Hedderichstraße 51</td>
+          <td>60594</td>
+          <td>Frankfurt am Main</td>
+          <td>Rhein-Main-Verkehrsverbund GmbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/FFS_2016-06-13_15-56-15.xml')">FFS_2016-06-13_15-56-15.xml</a></td>
+        </tr>
+        <tr>
+          <td>Hessen</td>
+          <td>Kassel</td>
+          <td>1973</td>
+          <td>Fulda</td>
+          <td>FFU</td>
+          <td>2</td>
+          <td>Am Bahnhof 3</td>
+          <td>36037</td>
+          <td>Fulda</td>
+          <td>Rhein-Main-Verkehrsverbund GmbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/FFU_2016-05-30_14-25-04.xml')">FFU_2016-05-30_14-25-04.xml</a></td>
+        </tr>
+        <tr>
+          <td>Hessen</td>
+          <td>Frankfurt a. M.</td>
+          <td>1858</td>
+          <td>Frankfurt (Main) West</td>
+          <td>FFW</td>
+          <td>3</td>
+          <td>Kasseler Str. 7</td>
+          <td>60486</td>
+          <td>Frankfurt am Main</td>
+          <td>Rhein-Main-Verkehrsverbund GmbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/FFW_2016-06-09_12-49-53.xml')">FFW_2016-06-09_12-49-53.xml</a></td>
+        </tr>
+        <tr>
+          <td>Hessen</td>
+          <td>Frankfurt a. M.</td>
+          <td>2537</td>
+          <td>Hanau Hbf</td>
+          <td>FH</td>
+          <td>2</td>
+          <td>Am Hauptbahnhof 14a</td>
+          <td>63450</td>
+          <td>Hanau</td>
+          <td>Rhein-Main-Verkehrsverbund GmbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/FH_2016-06-09_15-12-11.xml')">FH_2016-06-09_15-12-11.xml</a></td>
+        </tr>
+        <tr>
+          <td>Hessen</td>
+          <td>Kassel</td>
+          <td>3127</td>
+          <td>Kassel-Wilhelmshöhe</td>
+          <td>FKW</td>
+          <td>2</td>
+          <td>Willy-Brandt-Platz 1</td>
+          <td>34131</td>
+          <td>Kassel</td>
+          <td>Nordhessischer VerkehrsVerbund mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/FKW_2016-06-01_14-00-41.xml')">FKW_2016-06-01_14-00-41.xml</a></td>
+        </tr>
+        <tr>
+          <td>Hessen</td>
+          <td>Gießen</td>
+          <td>3723</td>
+          <td>Limburg Süd</td>
+          <td>FLIS</td>
+          <td>4</td>
+          <td>Londoner Str. 5</td>
+          <td>65552</td>
+          <td>Limburg</td>
+          <td>Rhein-Main-Verkehrsverbund GmbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/FLIS_2016-04-14_14-01-30.xml')">FLIS_2016-04-14_14-01-30.xml</a></td>
+        </tr>
+        <tr>
+          <td>Rheinland-Pfalz</td>
+          <td>Koblenz</td>
+          <td>4169</td>
+          <td>Montabaur</td>
+          <td>FMT</td>
+          <td>4</td>
+          <td>Staudter Str. 1</td>
+          <td>56410</td>
+          <td>Montabaur</td>
+          <td>Zweckverband Schienenpersonennahverkehr Rheinland-Pfalz Nord</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/FMT_2016-05-27_09-44-46.xml')">FMT_2016-05-27_09-44-46.xml</a></td>
+        </tr>
+        <tr>
+          <td>Rheinland-Pfalz</td>
+          <td>Mainz</td>
+          <td>3898</td>
+          <td>Mainz Hbf</td>
+          <td>FMZ</td>
+          <td>2</td>
+          <td>Bahnhofplatz 1</td>
+          <td>55116</td>
+          <td>Mainz</td>
+          <td>Zweckverband Schienenpersonennahverkehr Rheinland-Pfalz Süd</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/FMZ_2016-06-03_16-35-07.xml')">FMZ_2016-06-03_16-35-07.xml</a></td>
+        </tr>
+        <tr>
+          <td>Hessen</td>
+          <td>Frankfurt a. M.</td>
+          <td>4742</td>
+          <td>Offenbach (Main) Hbf</td>
+          <td>FO</td>
+          <td>4</td>
+          <td>Bismarckstr. 146</td>
+          <td>63065</td>
+          <td>Offenbach (Main)</td>
+          <td>Rhein-Main-Verkehrsverbund GmbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/FO_2016-06-13_10-10-56.xml')">FO_2016-06-13_10-10-56.xml</a></td>
+        </tr>
+        <tr>
+          <td>Hessen</td>
+          <td>Darmstadt</td>
+          <td>6744</td>
+          <td>Wiesbaden Hbf</td>
+          <td>FW</td>
+          <td>2</td>
+          <td>Bahnhofsplatz 1</td>
+          <td>65189</td>
+          <td>Wiesbaden</td>
+          <td>Rhein-Main-Verkehrsverbund GmbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/FW_2016-04-21_10-49-22.xml')">FW_2016-04-21_10-49-22.xml</a></td>
+        </tr>
+        <tr>
+          <td>Niedersachsen</td>
+          <td>Göttingen</td>
+          <td>54</td>
+          <td>Alfeld (Leine)</td>
+          <td>HALF</td>
+          <td>4</td>
+          <td>Am Bahnhof 1</td>
+          <td>31061</td>
+          <td>Alfeld</td>
+          <td>Landesnahverkehrsgesellschaft Niedersachsen mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/HALF_2016-06-09_11-12-24.xml')">HALF_2016-06-09_11-12-24.xml</a></td>
+        </tr>
+        <tr>
+          <td>Bremen</td>
+          <td>Bremen Hbf</td>
+          <td>855</td>
+          <td>Bremen Hbf</td>
+          <td>HB</td>
+          <td>2</td>
+          <td>Bahnhofsplatz 15</td>
+          <td>28195</td>
+          <td>Bremen</td>
+          <td>Senat für Umwelt, Bau, Verkehr und Europa, Bremen</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/HB_2016-06-03_09-53-37.xml')">HB_2016-06-03_09-53-37.xml</a></td>
+        </tr>
+        <tr>
+          <td>Nordrhein-Westfalen</td>
+          <td>Bielefeld</td>
+          <td>968</td>
+          <td>Bünde (Westf)</td>
+          <td>HBDE</td>
+          <td>4</td>
+          <td>Bahnhofstr. 82</td>
+          <td>32257</td>
+          <td>Bünde</td>
+          <td>Zweckverband Nahverkehr Westfalen-Lippe</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/HBDE_2016-05-31_09-08-16.xml')">HBDE_2016-05-31_09-08-16.xml</a></td>
+        </tr>
+        <tr>
+          <td>Niedersachsen</td>
+          <td>Braunschweig</td>
+          <td>835</td>
+          <td>Braunschweig Hbf</td>
+          <td>HBS</td>
+          <td>2</td>
+          <td>Willy-Brandt-Platz 1</td>
+          <td>38102</td>
+          <td>Braunschweig</td>
+          <td>Zweckverband Großraum Braunschweig</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/HBS_2016-06-02_10-59-12.xml')">HBS_2016-06-02_10-59-12.xml</a></td>
+        </tr>
+        <tr>
+          <td>Niedersachsen</td>
+          <td>Hannover</td>
+          <td>1036</td>
+          <td>Celle Pbf</td>
+          <td>HC</td>
+          <td>3</td>
+          <td>Bahnhofsplatz 6</td>
+          <td>29221</td>
+          <td>Celle</td>
+          <td>Landesnahverkehrsgesellschaft Niedersachsen mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/HC_2016-06-01_13-38-19.xml')">HC_2016-06-01_13-38-19.xml</a></td>
+        </tr>
+        <tr>
+          <td>Niedersachsen</td>
+          <td>Bremen Hbf</td>
+          <td>1159</td>
+          <td>Delmenhorst</td>
+          <td>HD</td>
+          <td>3</td>
+          <td>Wittekindstr. 10</td>
+          <td>27753</td>
+          <td>Delmenhorst</td>
+          <td>Landesnahverkehrsgesellschaft Niedersachsen mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/HD_2016-05-03_12-24-07.xml')">HD_2016-05-03_12-24-07.xml</a></td>
+        </tr>
+        <tr>
+          <td>Niedersachsen</td>
+          <td>Göttingen</td>
+          <td>1577</td>
+          <td>Elze (Han)</td>
+          <td>HELZ</td>
+          <td>4</td>
+          <td>Bahnhofstr. 70</td>
+          <td>31008</td>
+          <td>Elze</td>
+          <td>Landesnahverkehrsgesellschaft Niedersachsen mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/HELZ_2016-06-09_11-16-19.xml')">HELZ_2016-06-09_11-16-19.xml</a></td>
+        </tr>
+        <tr>
+          <td>Niedersachsen</td>
+          <td>Göttingen</td>
+          <td>2218</td>
+          <td>Göttingen</td>
+          <td>HG</td>
+          <td>2</td>
+          <td>Bahnhofsplatz 1</td>
+          <td>37073</td>
+          <td>Göttingen</td>
+          <td>Landesnahverkehrsgesellschaft Niedersachsen mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/HG_2016-02-08_07-44-27.xml')">HG_2016-02-08_07-44-27.xml</a></td>
+        </tr>
+        <tr>
+          <td>Niedersachsen</td>
+          <td>Göttingen</td>
+          <td>2765</td>
+          <td>Hildesheim Hbf</td>
+          <td>HHI</td>
+          <td>2</td>
+          <td>Bahnhofsplatz 1</td>
+          <td>31134</td>
+          <td>Hildesheim</td>
+          <td>Landesnahverkehrsgesellschaft Niedersachsen mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/HHI_2016-06-09_10-50-49.xml')">HHI_2016-06-09_10-50-49.xml</a></td>
+        </tr>
+        <tr>
+          <td>Niedersachsen</td>
+          <td>Hannover</td>
+          <td>3488</td>
+          <td>Hannover-Messe / Laatzen</td>
+          <td>HHML</td>
+          <td>4</td>
+          <td>Münchner Str. 2</td>
+          <td>30880</td>
+          <td>Laatzen</td>
+          <td>Region Hannover</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/HHML_2016-02-17_09-21-38.xml')">HHML_2016-02-17_09-21-38.xml</a></td>
+        </tr>
+        <tr>
+          <td>Niedersachsen</td>
+          <td>Göttingen</td>
+          <td>3407</td>
+          <td>Kreiensen</td>
+          <td>HK</td>
+          <td>4</td>
+          <td>Bahnhof 1</td>
+          <td>37547</td>
+          <td>Kreiensen</td>
+          <td>Landesnahverkehrsgesellschaft Niedersachsen mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/HK_2016-06-09_10-58-59.xml')">HK_2016-06-09_10-58-59.xml</a></td>
+        </tr>
+        <tr>
+          <td>Niedersachsen</td>
+          <td>Hannover</td>
+          <td>3620</td>
+          <td>Lehrte</td>
+          <td>HLER</td>
+          <td>3</td>
+          <td>Bahnhofstr. 50</td>
+          <td>31275</td>
+          <td>Lehrte</td>
+          <td>Region Hannover</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/HLER_2016-06-16_13-19-12.xml')">HLER_2016-06-16_13-19-12.xml</a></td>
+        </tr>
+        <tr>
+          <td>Niedersachsen</td>
+          <td>Osnabrück</td>
+          <td>3741</td>
+          <td>Lingen (Ems)</td>
+          <td>HLIG</td>
+          <td>4</td>
+          <td>Bernd-Rosemeyer Str. 18</td>
+          <td>49809</td>
+          <td>Lingen</td>
+          <td>Landesnahverkehrsgesellschaft Niedersachsen mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/HLIG_2016-06-09_09-29-03.xml')">HLIG_2016-06-09_09-29-03.xml</a></td>
+        </tr>
+        <tr>
+          <td>Niedersachsen</td>
+          <td>Osnabrück</td>
+          <td>3953</td>
+          <td>Marienhafe</td>
+          <td>HMAR</td>
+          <td>6</td>
+          <td>Oldendick 34</td>
+          <td>26529</td>
+          <td>Marienhafe</td>
+          <td>Landesnahverkehrsgesellschaft Niedersachsen mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/HMAR_2016-06-06_12-33-03.xml')">HMAR_2016-06-06_12-33-03.xml</a></td>
+        </tr>
+        <tr>
+          <td>Niedersachsen</td>
+          <td>Osnabrück</td>
+          <td>4061</td>
+          <td>Meppen</td>
+          <td>HMEP</td>
+          <td>4</td>
+          <td>Bahnhofstr. 41</td>
+          <td>49716</td>
+          <td>Meppen</td>
+          <td>Landesnahverkehrsgesellschaft Niedersachsen mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/HMEP_2016-06-09_09-31-28.xml')">HMEP_2016-06-09_09-31-28.xml</a></td>
+        </tr>
+        <tr>
+          <td>Niedersachsen</td>
+          <td>Göttingen</td>
+          <td>4587</td>
+          <td>Northeim (Han)</td>
+          <td>HN</td>
+          <td>3</td>
+          <td>Bahnhofstr. 3</td>
+          <td>37154</td>
+          <td>Northeim</td>
+          <td>Landesnahverkehrsgesellschaft Niedersachsen mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/HN_2016-06-09_10-54-18.xml')">HN_2016-06-09_10-54-18.xml</a></td>
+        </tr>
+        <tr>
+          <td>Niedersachsen</td>
+          <td>Hannover</td>
+          <td>4548</td>
+          <td>Nienburg (Weser)</td>
+          <td>HNBG</td>
+          <td>3</td>
+          <td>Bahnhofstr. 11</td>
+          <td>31582</td>
+          <td>Nienburg</td>
+          <td>Landesnahverkehrsgesellschaft Niedersachsen mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/HNBG_2016-05-31_11-13-43.xml')">HNBG_2016-05-31_11-13-43.xml</a></td>
+        </tr>
+        <tr>
+          <td>Niedersachsen</td>
+          <td>Osnabrück</td>
+          <td>4569</td>
+          <td>Norddeich</td>
+          <td>HND</td>
+          <td>6</td>
+          <td>Hafenstr. 1</td>
+          <td>26506</td>
+          <td>Norden</td>
+          <td>Landesnahverkehrsgesellschaft Niedersachsen mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/HND_2016-06-06_12-38-48.xml')">HND_2016-06-06_12-38-48.xml</a></td>
+        </tr>
+        <tr>
+          <td>Niedersachsen</td>
+          <td>Osnabrück</td>
+          <td>4570</td>
+          <td>Norddeich Mole</td>
+          <td>HNDM</td>
+          <td>4</td>
+          <td>Hafenstr. 1</td>
+          <td>26506</td>
+          <td>Norden</td>
+          <td>Landesnahverkehrsgesellschaft Niedersachsen mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/HNDM_2016-06-06_12-26-48.xml')">HNDM_2016-06-06_12-26-48.xml</a></td>
+        </tr>
+        <tr>
+          <td>Niedersachsen</td>
+          <td>Osnabrück</td>
+          <td>4571</td>
+          <td>Norden</td>
+          <td>HNN</td>
+          <td>5</td>
+          <td>Bahnhofstr. 36</td>
+          <td>26506</td>
+          <td>Norden</td>
+          <td>Landesnahverkehrsgesellschaft Niedersachsen mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/HNN_2016-06-06_15-40-13.xml')">HNN_2016-06-06_15-40-13.xml</a></td>
+        </tr>
+        <tr>
+          <td>Nordrhein-Westfalen</td>
+          <td>Bielefeld</td>
+          <td>315</td>
+          <td>Bad Oeynhausen</td>
+          <td>HOY</td>
+          <td>3</td>
+          <td>Herforder Str. 82</td>
+          <td>32545</td>
+          <td>Bad Oeynhausen</td>
+          <td>Zweckverband Nahverkehr Westfalen-Lippe</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/HOY_2016-06-02_13-40-53.xml')">HOY_2016-06-02_13-40-53.xml</a></td>
+        </tr>
+        <tr>
+          <td>Niedersachsen</td>
+          <td>Braunschweig</td>
+          <td>4885</td>
+          <td>Peine</td>
+          <td>HP</td>
+          <td>5</td>
+          <td>Bahnhofsplatz 1</td>
+          <td>31224</td>
+          <td>Peine</td>
+          <td>Zweckverband Großraum Braunschweig</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/HP_2016-05-30_13-27-57.xml')">HP_2016-05-30_13-27-57.xml</a></td>
+        </tr>
+        <tr>
+          <td>Niedersachsen</td>
+          <td>Osnabrück</td>
+          <td>4857</td>
+          <td>Papenburg (Ems)</td>
+          <td>HPAP</td>
+          <td>4</td>
+          <td>Bahnhofstr. 1</td>
+          <td>26871</td>
+          <td>Papenburg</td>
+          <td>Landesnahverkehrsgesellschaft Niedersachsen mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/HPAP_2016-06-09_09-34-55.xml')">HPAP_2016-06-09_09-34-55.xml</a></td>
+        </tr>
+        <tr>
+          <td>Niedersachsen</td>
+          <td>Braunschweig</td>
+          <td>6310</td>
+          <td>Uelzen</td>
+          <td>HU</td>
+          <td>2</td>
+          <td>Friedensreich-Hundertwasser-Platz 1</td>
+          <td>29525</td>
+          <td>Uelzen</td>
+          <td>Landesnahverkehrsgesellschaft Niedersachsen mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/HU_2016-06-02_12-58-18.xml')">HU_2016-06-02_12-58-18.xml</a></td>
+        </tr>
+        <tr>
+          <td>Niedersachsen</td>
+          <td>Bremen Hbf</td>
+          <td>6408</td>
+          <td>Verden (Aller)</td>
+          <td>HV</td>
+          <td>3</td>
+          <td>Bahnhofstr. 14</td>
+          <td>27283</td>
+          <td>Verden (Aller)</td>
+          <td>Landesnahverkehrsgesellschaft Niedersachsen mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/HV_2016-05-03_12-29-15.xml')">HV_2016-05-03_12-29-15.xml</a></td>
+        </tr>
+        <tr>
+          <td>Niedersachsen</td>
+          <td>Braunschweig</td>
+          <td>6859</td>
+          <td>Wolfsburg Hbf</td>
+          <td>HWOB</td>
+          <td>2</td>
+          <td>Willy-Brandt-Platz 3</td>
+          <td>38440</td>
+          <td>Wolfsburg</td>
+          <td>Zweckverband Großraum Braunschweig</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/HWOB_2016-06-02_11-26-23.xml')">HWOB_2016-06-02_11-26-23.xml</a></td>
+        </tr>
+        <tr>
+          <td>Nordrhein-Westfalen</td>
+          <td>Aachen</td>
+          <td>1</td>
+          <td>Aachen Hbf</td>
+          <td>KA</td>
+          <td>2</td>
+          <td>Bahnhofplatz 2a</td>
+          <td>52064</td>
+          <td>Aachen</td>
+          <td>Zweckverband Nahverkehr Rheinland GmbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/KA_2016-05-30_14-55-41.xml')">KA_2016-05-30_14-55-41.xml</a></td>
+        </tr>
+        <tr>
+          <td>Rheinland-Pfalz</td>
+          <td>Koblenz</td>
+          <td>144</td>
+          <td>Andernach</td>
+          <td>KAND</td>
+          <td>3</td>
+          <td>Kurfürstendamm 1</td>
+          <td>56626</td>
+          <td>Andernach</td>
+          <td>Zweckverband Schienenpersonennahverkehr Rheinland-Pfalz Nord</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/KAND_2016-06-08_12-10-41.xml')">KAND_2016-06-08_12-10-41.xml</a></td>
+        </tr>
+        <tr>
+          <td>Nordrhein-Westfalen</td>
+          <td>Bonn</td>
+          <td>767</td>
+          <td>Bonn Hbf</td>
+          <td>KB</td>
+          <td>2</td>
+          <td>Am Hauptbahnhof 1</td>
+          <td>53111</td>
+          <td>Bonn</td>
+          <td>Zweckverband Nahverkehr Rheinland GmbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/KB_2016-05-31_08-15-33.xml')">KB_2016-05-31_08-15-33.xml</a></td>
+        </tr>
+        <tr>
+          <td>Nordrhein-Westfalen</td>
+          <td>Düsseldorf</td>
+          <td>1401</td>
+          <td>Düsseldorf Hbf</td>
+          <td>KD</td>
+          <td>1</td>
+          <td>Konrad-Adenauer-Platz 14</td>
+          <td>40210</td>
+          <td>Düsseldorf</td>
+          <td>Zweckverband Verkehrsverbund Rhein-Ruhr AöR</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/KD_2016-04-22_10-42-49.xml')">KD_2016-04-22_10-42-49.xml</a></td>
+        </tr>
+        <tr>
+          <td>Nordrhein-Westfalen</td>
+          <td>Düsseldorf</td>
+          <td>1400</td>
+          <td>Düsseldorf Flughafen</td>
+          <td>KDFF</td>
+          <td>2</td>
+          <td>Ahrensplatz 1</td>
+          <td>40474</td>
+          <td>Düsseldorf</td>
+          <td>Zweckverband Verkehrsverbund Rhein-Ruhr AöR</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/KDFF_2016-03-17_11-20-43.xml')">KDFF_2016-03-17_11-20-43.xml</a></td>
+        </tr>
+        <tr>
+          <td>Nordrhein-Westfalen</td>
+          <td>Köln</td>
+          <td>4762</td>
+          <td>Köln/Bonn Flughafen</td>
+          <td>KFKB</td>
+          <td>3</td>
+          <td>Waldstraße 247</td>
+          <td>51147</td>
+          <td>Köln</td>
+          <td>Zweckverband Nahverkehr Rheinland GmbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/KFKB_2016-05-23_12-37-17.xml')">KFKB_2016-05-23_12-37-17.xml</a></td>
+        </tr>
+        <tr>
+          <td>Nordrhein-Westfalen</td>
+          <td>Köln</td>
+          <td>3320</td>
+          <td>Köln Hbf</td>
+          <td>KK</td>
+          <td>1</td>
+          <td>Trankgasse 11</td>
+          <td>50667</td>
+          <td>Köln</td>
+          <td>Zweckverband Nahverkehr Rheinland GmbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/KK_2016-06-08_12-45-41.xml')">KK_2016-06-08_12-45-41.xml</a></td>
+        </tr>
+        <tr>
+          <td>Nordrhein-Westfalen</td>
+          <td>Köln</td>
+          <td>3329</td>
+          <td>Köln Messe/Deutz</td>
+          <td>KKDZ</td>
+          <td>1</td>
+          <td>Ottoplatz 7</td>
+          <td>50679</td>
+          <td>Köln</td>
+          <td>Zweckverband Nahverkehr Rheinland GmbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/KKDZ_2016-05-30_10-46-03.xml')">KKDZ_2016-05-30_10-46-03.xml</a></td>
+        </tr>
+        <tr>
+          <td>Rheinland-Pfalz</td>
+          <td>Koblenz</td>
+          <td>3299</td>
+          <td>Koblenz Hbf</td>
+          <td>KKO</td>
+          <td>2</td>
+          <td>Bahnhofsplatz 2</td>
+          <td>56068</td>
+          <td>Koblenz</td>
+          <td>Zweckverband Schienenpersonennahverkehr Rheinland-Pfalz Nord</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/KKO_2016-06-09_11-08-33.xml')">KKO_2016-06-09_11-08-33.xml</a></td>
+        </tr>
+        <tr>
+          <td>Rheinland-Pfalz</td>
+          <td>Koblenz</td>
+          <td>5214</td>
+          <td>Remagen</td>
+          <td>KRE</td>
+          <td>3</td>
+          <td>Maisons-Laffitte-Platz 2</td>
+          <td>53424</td>
+          <td>Remagen</td>
+          <td>Zweckverband Schienenpersonennahverkehr Rheinland-Pfalz Nord</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/KRE_2016-06-08_15-29-38.xml')">KRE_2016-06-08_15-29-38.xml</a></td>
+        </tr>
+        <tr>
+          <td>Nordrhein-Westfalen</td>
+          <td>Bonn</td>
+          <td>5840</td>
+          <td>Siegburg/Bonn</td>
+          <td>KSIB</td>
+          <td>3</td>
+          <td>Wilhelmstr. 45</td>
+          <td>53721</td>
+          <td>Siegburg</td>
+          <td>Zweckverband Nahverkehr Rheinland GmbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/KSIB_2016-06-06_14-51-47.xml')">KSIB_2016-06-06_14-51-47.xml</a></td>
+        </tr>
+        <tr>
+          <td>Brandenburg</td>
+          <td>Potsdam</td>
+          <td>823</td>
+          <td>Brandenburg Hbf</td>
+          <td>LB</td>
+          <td>3</td>
+          <td>Am Hauptbahnhof 9</td>
+          <td>14774</td>
+          <td>Brandenburg an der Havel</td>
+          <td>Verkehrsverbund Berlin-Brandenburg GmbH für Brandenburg</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/LB_2016-06-07_12-33-50.xml')">LB_2016-06-07_12-33-50.xml</a></td>
+        </tr>
+        <tr>
+          <td>Sachsen-Anhalt</td>
+          <td>Halle (Saale)</td>
+          <td>680</td>
+          <td>Bitterfeld</td>
+          <td>LBT</td>
+          <td>3</td>
+          <td>Bahnhofstr. 1</td>
+          <td>06749</td>
+          <td>Bitterfeld-Wolfen</td>
+          <td>Nahverkehrsservice Sachsen-Anhalt GmbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/LBT_2016-05-31_07-53-56.xml')">LBT_2016-05-31_07-53-56.xml</a></td>
+        </tr>
+        <tr>
+          <td>Sachsen</td>
+          <td>Leipzig</td>
+          <td>8015</td>
+          <td>Flughafen Leipzig/Halle</td>
+          <td>LFLU</td>
+          <td>4</td>
+          <td>Am Flughafenbahnhof</td>
+          <td>04435</td>
+          <td>Schkeuditz</td>
+          <td>Zweckverband für den Nahverkehrsraum Leipzig</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/LFLU_2016-02-18_08-22-23.xml')">LFLU_2016-02-18_08-22-23.xml</a></td>
+        </tr>
+        <tr>
+          <td>Sachsen-Anhalt</td>
+          <td>Halle (Saale)</td>
+          <td>2498</td>
+          <td>Halle (Saale) Hbf</td>
+          <td>LH</td>
+          <td>2</td>
+          <td>Bahnhofsplatz 1</td>
+          <td>06112</td>
+          <td>Halle</td>
+          <td>Nahverkehrsservice Sachsen-Anhalt GmbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/LH_2016-05-30_13-04-29.xml')">LH_2016-05-30_13-04-29.xml</a></td>
+        </tr>
+        <tr>
+          <td>Sachsen</td>
+          <td>Leipzig</td>
+          <td>3631</td>
+          <td>Leipzig Hbf</td>
+          <td>LL</td>
+          <td>1</td>
+          <td>Willy-Brandt-Platz 5</td>
+          <td>04109</td>
+          <td>Leipzig</td>
+          <td>Zweckverband für den Nahverkehrsraum Leipzig</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/LL_2016-05-30_13-16-38.xml')">LL_2016-05-30_13-16-38.xml</a></td>
+        </tr>
+        <tr>
+          <td>Sachsen-Anhalt</td>
+          <td>Magdeburg</td>
+          <td>3881</td>
+          <td>Magdeburg Hbf</td>
+          <td>LM</td>
+          <td>2</td>
+          <td>Bahnhofstr. 69</td>
+          <td>39104</td>
+          <td>Magdeburg</td>
+          <td>Nahverkehrsservice Sachsen-Anhalt GmbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/LM_2016-06-06_13-08-01.xml')">LM_2016-06-06_13-08-01.xml</a></td>
+        </tr>
+        <tr>
+          <td>Sachsen-Anhalt</td>
+          <td>Halle (Saale)</td>
+          <td>3863</td>
+          <td>Lutherstadt Wittenberg</td>
+          <td>LW</td>
+          <td>3</td>
+          <td>Am Hauptbahnhof 1</td>
+          <td>06886</td>
+          <td>Lutherstadt Wittenberg</td>
+          <td>Nahverkehrsservice Sachsen-Anhalt GmbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/LW_2016-05-30_13-38-44.xml')">LW_2016-05-30_13-38-44.xml</a></td>
+        </tr>
+        <tr>
+          <td>Bayern</td>
+          <td>Augsburg</td>
+          <td>220</td>
+          <td>Augsburg Hbf</td>
+          <td>MA</td>
+          <td>2</td>
+          <td>Viktoriastr. 1</td>
+          <td>86150</td>
+          <td>Augsburg</td>
+          <td>Bayerische Eisenbahngesellschaft mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/MA_2016-04-08_11-55-53.xml')">MA_2016-04-08_11-55-53.xml</a></td>
+        </tr>
+        <tr>
+          <td>Bayern</td>
+          <td>München</td>
+          <td>4234</td>
+          <td>München Hbf</td>
+          <td>MH</td>
+          <td>1</td>
+          <td>Bayerstr. 10a</td>
+          <td>80335</td>
+          <td>München</td>
+          <td>Bayerische Eisenbahngesellschaft mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/MH_2016-06-17_08-28-08.xml')">MH_2016-06-17_08-28-08.xml</a></td>
+        </tr>
+        <tr>
+          <td>Bayern</td>
+          <td>München</td>
+          <td>4241</td>
+          <td>München Ost</td>
+          <td>MOP</td>
+          <td>1</td>
+          <td>Orleansplatz 11</td>
+          <td>81667</td>
+          <td>München</td>
+          <td>Bayerische Eisenbahngesellschaft mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/MOP_2016-04-28_11-26-58.xml')">MOP_2016-04-28_11-26-58.xml</a></td>
+        </tr>
+        <tr>
+          <td>Bayern</td>
+          <td>München</td>
+          <td>4266</td>
+          <td>München-Pasing</td>
+          <td>MP</td>
+          <td>2</td>
+          <td>Pasinger Bahnhofsplatz 7-9 6-10</td>
+          <td>81241</td>
+          <td>München</td>
+          <td>Bayerische Eisenbahngesellschaft mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/MP_2016-05-23_14-16-29.xml')">MP_2016-05-23_14-16-29.xml</a></td>
+        </tr>
+        <tr>
+          <td>Bayern</td>
+          <td>Rosenheim</td>
+          <td>5348</td>
+          <td>Rosenheim</td>
+          <td>MRO</td>
+          <td>2</td>
+          <td>Südtiroler Platz 1</td>
+          <td>83022</td>
+          <td>Rosenheim</td>
+          <td>Bayerische Eisenbahngesellschaft mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/MRO_2016-01-21_09-40-13.xml')">MRO_2016-01-21_09-40-13.xml</a></td>
+        </tr>
+        <tr>
+          <td>Bayern</td>
+          <td>Nürnberg</td>
+          <td>6252</td>
+          <td>Treuchtlingen</td>
+          <td>MTL</td>
+          <td>3</td>
+          <td>Bahnhofstr. 61</td>
+          <td>91757</td>
+          <td>Treuchtlingen</td>
+          <td>Bayerische Eisenbahngesellschaft mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/MTL_2016-05-30_13-06-36.xml')">MTL_2016-05-30_13-06-36.xml</a></td>
+        </tr>
+        <tr>
+          <td>Bayern</td>
+          <td>München</td>
+          <td>6294</td>
+          <td>Tutzing</td>
+          <td>MTZ</td>
+          <td>3</td>
+          <td>Bahnhofstr. 26</td>
+          <td>82327</td>
+          <td>Tutzing</td>
+          <td>Bayerische Eisenbahngesellschaft mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/MTZ_2016-03-07_15-44-00.xml')">MTZ_2016-03-07_15-44-00.xml</a></td>
+        </tr>
+        <tr>
+          <td>Bayern</td>
+          <td>Nürnberg</td>
+          <td>161</td>
+          <td>Ansbach</td>
+          <td>NAN</td>
+          <td>3</td>
+          <td>Bahnhofplatz 2</td>
+          <td>91522</td>
+          <td>Ansbach</td>
+          <td>Bayerische Eisenbahngesellschaft mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/NAN_2016-05-30_12-06-58.xml')">NAN_2016-05-30_12-06-58.xml</a></td>
+        </tr>
+        <tr>
+          <td>Bayern</td>
+          <td>Nürnberg</td>
+          <td>1650</td>
+          <td>Erlangen</td>
+          <td>NER</td>
+          <td>3</td>
+          <td>Bahnhofsplatz 1</td>
+          <td>91054</td>
+          <td>Erlangen</td>
+          <td>Bayerische Eisenbahngesellschaft mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/NER_2016-05-23_12-05-42.xml')">NER_2016-05-23_12-05-42.xml</a></td>
+        </tr>
+        <tr>
+          <td>Bayern</td>
+          <td>Nürnberg</td>
+          <td>2424</td>
+          <td>Gunzenhausen</td>
+          <td>NGUN</td>
+          <td>4</td>
+          <td>Bahnhofsplatz 3</td>
+          <td>91710</td>
+          <td>Gunzenhausen</td>
+          <td>Bayerische Eisenbahngesellschaft mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/NGUN_2016-05-30_11-24-22.xml')">NGUN_2016-05-30_11-24-22.xml</a></td>
+        </tr>
+        <tr>
+          <td>Bayern</td>
+          <td>Nürnberg</td>
+          <td>4593</td>
+          <td>Nürnberg Hbf</td>
+          <td>NN</td>
+          <td>1</td>
+          <td>Bahnhofsplatz 9</td>
+          <td>90443</td>
+          <td>Nürnberg</td>
+          <td>Bayerische Eisenbahngesellschaft mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/NN_2016-06-06_13-31-13.xml')">NN_2016-06-06_13-31-13.xml</a></td>
+        </tr>
+        <tr>
+          <td>Bayern</td>
+          <td>Regensburg</td>
+          <td>4952</td>
+          <td>Plattling</td>
+          <td>NPL</td>
+          <td>3</td>
+          <td>Bahnhofplatz 6</td>
+          <td>94447</td>
+          <td>Plattling</td>
+          <td>Bayerische Eisenbahngesellschaft mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/NPL_2016-05-11_14-47-43.xml')">NPL_2016-05-11_14-47-43.xml</a></td>
+        </tr>
+        <tr>
+          <td>Bayern</td>
+          <td>Regensburg</td>
+          <td>5169</td>
+          <td>Regensburg Hbf</td>
+          <td>NRH</td>
+          <td>2</td>
+          <td>Bahnhofstr. 18</td>
+          <td>93047</td>
+          <td>Regensburg</td>
+          <td>Bayerische Eisenbahngesellschaft mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/NRH_2016-05-11_14-43-11.xml')">NRH_2016-05-11_14-43-11.xml</a></td>
+        </tr>
+        <tr>
+          <td>Bayern</td>
+          <td>Nürnberg</td>
+          <td>5981</td>
+          <td>Steinach (b Rothenburg o.d. Tauber)</td>
+          <td>NSTN</td>
+          <td>4</td>
+          <td>Bahnhofstr. 21</td>
+          <td>91605</td>
+          <td>Gallmersgarten</td>
+          <td>Bayerische Eisenbahngesellschaft mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/NSTN_2016-05-30_10-37-42.xml')">NSTN_2016-05-30_10-37-42.xml</a></td>
+        </tr>
+        <tr>
+          <td>Baden-Württemberg</td>
+          <td>Freiburg</td>
+          <td>1893</td>
+          <td>Freiburg (Breisgau) Hbf</td>
+          <td>RF</td>
+          <td>2</td>
+          <td>Bismarckallee 5-7</td>
+          <td>79098</td>
+          <td>Freiburg</td>
+          <td>Nahverkehrsgesellschaft Baden-Württemberg mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/RF_2016-06-06_14-09-47.xml')">RF_2016-06-06_14-09-47.xml</a></td>
+        </tr>
+        <tr>
+          <td>Baden-Württemberg</td>
+          <td>Mannheim</td>
+          <td>2628</td>
+          <td>Heidelberg Hbf</td>
+          <td>RH</td>
+          <td>2</td>
+          <td>Willy-Brandt-Platz 5</td>
+          <td>69115</td>
+          <td>Heidelberg</td>
+          <td>Nahverkehrsgesellschaft Baden-Württemberg mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/RH_2016-05-25_12-14-05.xml')">RH_2016-05-25_12-14-05.xml</a></td>
+        </tr>
+        <tr>
+          <td>Baden-Württemberg</td>
+          <td>Karlsruhe</td>
+          <td>3107</td>
+          <td>Karlsruhe Hbf</td>
+          <td>RK</td>
+          <td>1</td>
+          <td>Bahnhofplatz 1a</td>
+          <td>76137</td>
+          <td>Karlsruhe</td>
+          <td>Nahverkehrsgesellschaft Baden-Württemberg mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/RK_2016-03-23_13-41-54.xml')">RK_2016-03-23_13-41-54.xml</a></td>
+        </tr>
+        <tr>
+          <td>Baden-Württemberg</td>
+          <td>Mannheim</td>
+          <td>3925</td>
+          <td>Mannheim Hbf</td>
+          <td>RM</td>
+          <td>2</td>
+          <td>Willy-Brandt-Platz 17</td>
+          <td>68161</td>
+          <td>Mannheim</td>
+          <td>Nahverkehrsgesellschaft Baden-Württemberg mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/RM_2016-05-25_12-26-50.xml')">RM_2016-05-25_12-26-50.xml</a></td>
+        </tr>
+        <tr>
+          <td>Baden-Württemberg</td>
+          <td>Freiburg</td>
+          <td>4745</td>
+          <td>Offenburg</td>
+          <td>RO</td>
+          <td>2</td>
+          <td>Hauptstr. 1</td>
+          <td>77652</td>
+          <td>Offenburg</td>
+          <td>Nahverkehrsgesellschaft Baden-Württemberg mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/RO_2016-06-06_14-05-18.xml')">RO_2016-06-06_14-05-18.xml</a></td>
+        </tr>
+        <tr>
+          <td>Baden-Württemberg</td>
+          <td>Friedrichshafen</td>
+          <td>5865</td>
+          <td>Singen (Hohentwiel)</td>
+          <td>RSI</td>
+          <td>2</td>
+          <td>Bahnhofstr. 2</td>
+          <td>78224</td>
+          <td>Singen</td>
+          <td>Nahverkehrsgesellschaft Baden-Württemberg mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/RSI_2016-05-05_22-03-27.xml')">RSI_2016-05-05_22-03-27.xml</a></td>
+        </tr>
+        <tr>
+          <td>Baden-Württemberg</td>
+          <td>Mannheim</td>
+          <td>6622</td>
+          <td>Weinheim (Bergstr)</td>
+          <td>RWE</td>
+          <td>4</td>
+          <td>Am Hauptbahnhof 1</td>
+          <td>64469</td>
+          <td>Weinheim</td>
+          <td>Nahverkehrsgesellschaft Baden-Württemberg mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/RWE_2016-05-25_12-18-57.xml')">RWE_2016-05-25_12-18-57.xml</a></td>
+        </tr>
+        <tr>
+          <td>Baden-Württemberg</td>
+          <td>Mannheim</td>
+          <td>6759</td>
+          <td>Wiesloch-Walldorf</td>
+          <td>RWS</td>
+          <td>3</td>
+          <td>Staatsbahnhofstr. 14</td>
+          <td>69168</td>
+          <td>Wiesloch</td>
+          <td>Nahverkehrsgesellschaft Baden-Württemberg mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/RWS_2016-05-25_12-22-25.xml')">RWS_2016-05-25_12-22-25.xml</a></td>
+        </tr>
+        <tr>
+          <td>Saarland</td>
+          <td>Saarbrücken</td>
+          <td>2892</td>
+          <td>Homburg (Saar) Hbf</td>
+          <td>SHO</td>
+          <td>3</td>
+          <td>Bahnhofsplatz 5</td>
+          <td>66424</td>
+          <td>Homburg (Saar)</td>
+          <td>Verkehrsverbund-Gesellschaft Saar mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/SHO_2016-04-25_08-08-00.xml')">SHO_2016-04-25_08-08-00.xml</a></td>
+        </tr>
+        <tr>
+          <td>Saarland</td>
+          <td>Saarbrücken</td>
+          <td>5451</td>
+          <td>Saarbrücken Hbf</td>
+          <td>SSH</td>
+          <td>2</td>
+          <td>Am Hauptbahnhof 6-12</td>
+          <td>66111</td>
+          <td>Saarbrücken</td>
+          <td>Verkehrsverbund-Gesellschaft Saar mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/SSH_2016-04-26_09-40-11.xml')">SSH_2016-04-26_09-40-11.xml</a></td>
+        </tr>
+        <tr>
+          <td>Baden-Württemberg</td>
+          <td>Stuttgart</td>
+          <td>720</td>
+          <td>Böblingen</td>
+          <td>TBO</td>
+          <td>3</td>
+          <td>Bahnhof 1/ Bahnhof 2</td>
+          <td>71034</td>
+          <td>Böblingen</td>
+          <td>Nahverkehrsgesellschaft Baden-Württemberg mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/TBO_2016-05-25_08-51-17.xml')">TBO_2016-05-25_08-51-17.xml</a></td>
+        </tr>
+        <tr>
+          <td>Baden-Württemberg</td>
+          <td>Karlsruhe</td>
+          <td>2906</td>
+          <td>Horb</td>
+          <td>THB</td>
+          <td>3</td>
+          <td>Bahnhofplatz 1</td>
+          <td>72160</td>
+          <td>Horb</td>
+          <td>Nahverkehrsgesellschaft Baden-Württemberg mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/THB_2016-02-26_08-21-46.xml')">THB_2016-02-26_08-21-46.xml</a></td>
+        </tr>
+        <tr>
+          <td>Baden-Württemberg</td>
+          <td>Stuttgart</td>
+          <td>4967</td>
+          <td>Plochingen</td>
+          <td>TP</td>
+          <td>2</td>
+          <td>Am Bahnhof 1</td>
+          <td>73207</td>
+          <td>Plochingen</td>
+          <td>Nahverkehrsgesellschaft Baden-Württemberg mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/TP_2016-05-25_08-49-47.xml')">TP_2016-05-25_08-49-47.xml</a></td>
+        </tr>
+        <tr>
+          <td>Baden-Württemberg</td>
+          <td>Freiburg</td>
+          <td>5405</td>
+          <td>Rottweil</td>
+          <td>TR</td>
+          <td>3</td>
+          <td>Bahnhofstr. 1</td>
+          <td>78628</td>
+          <td>Rottweil</td>
+          <td>Nahverkehrsgesellschaft Baden-Württemberg mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/TR_2016-03-17_11-52-54.xml')">TR_2016-03-17_11-52-54.xml</a></td>
+        </tr>
+        <tr>
+          <td>NA</td>
+          <td>NA</td>
+          <td>NA</td>
+          <td>NA</td>
+          <td>TST</td>
+          <td>NA</td>
+          <td>NA</td>
+          <td>NA</td>
+          <td>NA</td>
+          <td>NA</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/TST_2016-06-06_14-57-29.xml')">TST_2016-06-06_14-57-29.xml</a></td>
+        </tr>
+        <tr>
+          <td>Baden-Württemberg</td>
+          <td>Freiburg</td>
+          <td>6292</td>
+          <td>Tuttlingen</td>
+          <td>TTU</td>
+          <td>3</td>
+          <td>Bahnhof 1</td>
+          <td>78532</td>
+          <td>Tuttlingen</td>
+          <td>Nahverkehrsgesellschaft Baden-Württemberg mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/TTU_2016-03-17_11-56-08.xml')">TTU_2016-03-17_11-56-08.xml</a></td>
+        </tr>
+        <tr>
+          <td>Baden-Württemberg</td>
+          <td>Mannheim</td>
+          <td>6390</td>
+          <td>Vaihingen (Enz)</td>
+          <td>TV</td>
+          <td>4</td>
+          <td>Neue Bahnhofstr. 36</td>
+          <td>71665</td>
+          <td>Vaihingen (Enz)</td>
+          <td>Nahverkehrsgesellschaft Baden-Württemberg mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/TV_2016-06-09_07-54-54.xml')">TV_2016-06-09_07-54-54.xml</a></td>
+        </tr>
+        <tr>
+          <td>Thüringen</td>
+          <td>Erfurt</td>
+          <td>1634</td>
+          <td>Erfurt Hbf</td>
+          <td>UE</td>
+          <td>2</td>
+          <td>Willy-Brandt-Platz 12</td>
+          <td>99084</td>
+          <td>Erfurt</td>
+          <td>Nahverkehrsservicegesellschaft Thüringen mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/UE_2016-02-10_09-27-12.xml')">UE_2016-02-10_09-27-12.xml</a></td>
+        </tr>
+        <tr>
+          <td>Sachsen-Anhalt</td>
+          <td>Halle (Saale)</td>
+          <td>4309</td>
+          <td>Naumburg (Saale) Hbf</td>
+          <td>UNM</td>
+          <td>3</td>
+          <td>Bahnhofstraße 46</td>
+          <td>06618</td>
+          <td>Naumburg</td>
+          <td>Nahverkehrsservice Sachsen-Anhalt GmbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/UNM_2016-06-01_09-15-40.xml')">UNM_2016-06-01_09-15-40.xml</a></td>
+        </tr>
+        <tr>
+          <td>Sachsen-Anhalt</td>
+          <td>Halle (Saale)</td>
+          <td>6633</td>
+          <td>Weißenfels</td>
+          <td>UW</td>
+          <td>3</td>
+          <td>Bahnhofstr. 2</td>
+          <td>06667</td>
+          <td>Weißenfels</td>
+          <td>Nahverkehrsservice Sachsen-Anhalt GmbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/UW_2016-06-01_09-35-23.xml')">UW_2016-06-01_09-35-23.xml</a></td>
+        </tr>
+        <tr>
+          <td>Brandenburg</td>
+          <td>Frankfurt (Oder)</td>
+          <td>148</td>
+          <td>Angermünde</td>
+          <td>WA</td>
+          <td>3</td>
+          <td>Bahnhofsplatz 1c</td>
+          <td>16278</td>
+          <td>Angermünde</td>
+          <td>Verkehrsverbund Berlin-Brandenburg GmbH für Brandenburg</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/WA_2016-06-08_19-59-07.xml')">WA_2016-06-08_19-59-07.xml</a></td>
+        </tr>
+        <tr>
+          <td>Mecklenburg-Vorpommern</td>
+          <td>Stralsund</td>
+          <td>152</td>
+          <td>Anklam</td>
+          <td>WAK</td>
+          <td>5</td>
+          <td>Bahnhofstraße 1</td>
+          <td>17389</td>
+          <td>Anklam</td>
+          <td>Verkehrsgesellschaft Mecklenburg-Vorpommern mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/WAK_2016-05-31_08-47-48.xml')">WAK_2016-05-31_08-47-48.xml</a></td>
+        </tr>
+        <tr>
+          <td>Mecklenburg-Vorpommern</td>
+          <td>Rostock</td>
+          <td>1014</td>
+          <td>Bützow</td>
+          <td>WB</td>
+          <td>4</td>
+          <td>Bahnhofstr. 40</td>
+          <td>18246</td>
+          <td>Bützow</td>
+          <td>Verkehrsgesellschaft Mecklenburg-Vorpommern mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/WB_2016-05-31_07-32-19.xml')">WB_2016-05-31_07-32-19.xml</a></td>
+        </tr>
+        <tr>
+          <td>Mecklenburg-Vorpommern</td>
+          <td>Stralsund</td>
+          <td>499</td>
+          <td>Bergen auf Rügen</td>
+          <td>WBG</td>
+          <td>3</td>
+          <td>Bahnhofstr. 34</td>
+          <td>18528</td>
+          <td>Bergen (Rügen)</td>
+          <td>Verkehrsgesellschaft Mecklenburg-Vorpommern mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/WBG_2016-05-31_10-00-58.xml')">WBG_2016-05-31_10-00-58.xml</a></td>
+        </tr>
+        <tr>
+          <td>Mecklenburg-Vorpommern</td>
+          <td>Stralsund</td>
+          <td>653</td>
+          <td>Ostseebad Binz</td>
+          <td>WBI</td>
+          <td>3</td>
+          <td>Dollahnerstr. 17</td>
+          <td>18609</td>
+          <td>Binz</td>
+          <td>Verkehrsgesellschaft Mecklenburg-Vorpommern mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/WBI_2016-05-31_08-52-03.xml')">WBI_2016-05-31_08-52-03.xml</a></td>
+        </tr>
+        <tr>
+          <td>Brandenburg</td>
+          <td>Frankfurt (Oder)</td>
+          <td>1444</td>
+          <td>Eberswalde Hbf</td>
+          <td>WE</td>
+          <td>3</td>
+          <td>Bahnhofsring 17</td>
+          <td>16225</td>
+          <td>Eberswalde</td>
+          <td>Verkehrsverbund Berlin-Brandenburg GmbH für Brandenburg</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/WE_2016-06-09_08-16-05.xml')">WE_2016-06-09_08-16-05.xml</a></td>
+        </tr>
+        <tr>
+          <td>Mecklenburg-Vorpommern</td>
+          <td>Stralsund</td>
+          <td>2252</td>
+          <td>Greifswald</td>
+          <td>WGW</td>
+          <td>4</td>
+          <td>Bahnhofstr. 43</td>
+          <td>17489</td>
+          <td>Greifswald</td>
+          <td>Verkehrsgesellschaft Mecklenburg-Vorpommern mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/WGW_2016-05-31_08-42-42.xml')">WGW_2016-05-31_08-42-42.xml</a></td>
+        </tr>
+        <tr>
+          <td>Mecklenburg-Vorpommern</td>
+          <td>Schwerin</td>
+          <td>289</td>
+          <td>Bad Kleinen</td>
+          <td>WK</td>
+          <td>4</td>
+          <td>Rosensteig 7</td>
+          <td>23996</td>
+          <td>Bad Kleinen</td>
+          <td>Verkehrsgesellschaft Mecklenburg-Vorpommern mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/WK_2016-05-24_09-38-19.xml')">WK_2016-05-24_09-38-19.xml</a></td>
+        </tr>
+        <tr>
+          <td>Mecklenburg-Vorpommern</td>
+          <td>Schwerin</td>
+          <td>3843</td>
+          <td>Ludwigslust</td>
+          <td>WL</td>
+          <td>4</td>
+          <td>Rudolf-Tarnow-Str. 1</td>
+          <td>19288</td>
+          <td>Ludwigslust</td>
+          <td>Verkehrsgesellschaft Mecklenburg-Vorpommern mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/WL_2016-05-25_12-48-19.xml')">WL_2016-05-25_12-48-19.xml</a></td>
+        </tr>
+        <tr>
+          <td>Mecklenburg-Vorpommern</td>
+          <td>Stralsund</td>
+          <td>4870</td>
+          <td>Pasewalk</td>
+          <td>WP</td>
+          <td>4</td>
+          <td>Am Bahnhof 4</td>
+          <td>17309</td>
+          <td>Pasewalk</td>
+          <td>Verkehrsgesellschaft Mecklenburg-Vorpommern mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/WP_2016-05-31_08-56-19.xml')">WP_2016-05-31_08-56-19.xml</a></td>
+        </tr>
+        <tr>
+          <td>Brandenburg</td>
+          <td>Frankfurt (Oder)</td>
+          <td>5023</td>
+          <td>Prenzlau</td>
+          <td>WPL</td>
+          <td>4</td>
+          <td>Stettiner Str. 52</td>
+          <td>17291</td>
+          <td>Prenzlau</td>
+          <td>Verkehrsverbund Berlin-Brandenburg GmbH für Brandenburg</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/WPL_2016-06-08_20-03-19.xml')">WPL_2016-06-08_20-03-19.xml</a></td>
+        </tr>
+        <tr>
+          <td>Mecklenburg-Vorpommern</td>
+          <td>Stralsund</td>
+          <td>5048</td>
+          <td>Prora</td>
+          <td>WPRA</td>
+          <td>6</td>
+          <td>Mukraner Str. 1</td>
+          <td>18609</td>
+          <td>Binz</td>
+          <td>Verkehrsgesellschaft Mecklenburg-Vorpommern mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/WPRA_2016-05-31_09-08-02.xml')">WPRA_2016-05-31_09-08-02.xml</a></td>
+        </tr>
+        <tr>
+          <td>Mecklenburg-Vorpommern</td>
+          <td>Rostock</td>
+          <td>5365</td>
+          <td>Rostock Hbf</td>
+          <td>WR</td>
+          <td>2</td>
+          <td>Konrad-Adenauer-Platz 1</td>
+          <td>18055</td>
+          <td>Rostock</td>
+          <td>Verkehrsgesellschaft Mecklenburg-Vorpommern mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/WR_2016-05-31_07-35-47.xml')">WR_2016-05-31_07-35-47.xml</a></td>
+        </tr>
+        <tr>
+          <td>Mecklenburg-Vorpommern</td>
+          <td>Stralsund</td>
+          <td>5265</td>
+          <td>Ribnitz-Damgarten West</td>
+          <td>WRI</td>
+          <td>4</td>
+          <td>Bahnhofstr. 42</td>
+          <td>18311</td>
+          <td>Ribnitz</td>
+          <td>Verkehrsgesellschaft Mecklenburg-Vorpommern mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/WRI_2016-05-31_10-26-55.xml')">WRI_2016-05-31_10-26-55.xml</a></td>
+        </tr>
+        <tr>
+          <td>Mecklenburg-Vorpommern</td>
+          <td>Schwerin</td>
+          <td>5755</td>
+          <td>Schwerin Hbf</td>
+          <td>WS</td>
+          <td>3</td>
+          <td>Grunthalplatz 4</td>
+          <td>19053</td>
+          <td>Schwerin</td>
+          <td>Verkehrsgesellschaft Mecklenburg-Vorpommern mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/WS_2016-05-24_09-23-43.xml')">WS_2016-05-24_09-23-43.xml</a></td>
+        </tr>
+        <tr>
+          <td>Mecklenburg-Vorpommern</td>
+          <td>Stralsund</td>
+          <td>6049</td>
+          <td>Stralsund Hbf</td>
+          <td>WSR</td>
+          <td>3</td>
+          <td>Tribseer Damm 75</td>
+          <td>18437</td>
+          <td>Stralsund</td>
+          <td>Verkehrsgesellschaft Mecklenburg-Vorpommern mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/WSR_2016-05-31_09-12-51.xml')">WSR_2016-05-31_09-12-51.xml</a></td>
+        </tr>
+        <tr>
+          <td>Mecklenburg-Vorpommern</td>
+          <td>Stralsund</td>
+          <td>6405</td>
+          <td>Velgast</td>
+          <td>WV</td>
+          <td>5</td>
+          <td>Bahnhofstr. 3</td>
+          <td>18469</td>
+          <td>Velgast</td>
+          <td>Verkehrsgesellschaft Mecklenburg-Vorpommern mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/WV_2016-05-31_09-15-55.xml')">WV_2016-05-31_09-15-55.xml</a></td>
+        </tr>
+        <tr>
+          <td>Brandenburg</td>
+          <td>Potsdam</td>
+          <td>6825</td>
+          <td>Wittenberge</td>
+          <td>WW</td>
+          <td>3</td>
+          <td>Am Bahnhof 1</td>
+          <td>19322</td>
+          <td>Wittenberge</td>
+          <td>Verkehrsverbund Berlin-Brandenburg GmbH für Brandenburg</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/WW_2016-06-02_12-12-54.xml')">WW_2016-06-02_12-12-54.xml</a></td>
+        </tr>
+        <tr>
+          <td>Mecklenburg-Vorpommern</td>
+          <td>Rostock</td>
+          <td>6545</td>
+          <td>Warnemünde</td>
+          <td>WWM</td>
+          <td>3</td>
+          <td>Am Bahnhof 5</td>
+          <td>18119</td>
+          <td>Rostock</td>
+          <td>Verkehrsgesellschaft Mecklenburg-Vorpommern mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/WWM_2016-05-31_07-38-03.xml')">WWM_2016-05-31_07-38-03.xml</a></td>
+        </tr>
+        <tr>
+          <td>Mecklenburg-Vorpommern</td>
+          <td>Stralsund</td>
+          <td>7063</td>
+          <td>Züssow</td>
+          <td>WZS</td>
+          <td>5</td>
+          <td>Bahnhofstraße 3</td>
+          <td>17495</td>
+          <td>Züssow</td>
+          <td>Verkehrsgesellschaft Mecklenburg-Vorpommern mbH</td>
+          <td><a onclick="Init('Wagenreihungsplan_RawData_20160617/WZS_2016-05-31_09-24-30.xml')">WZS_2016-05-31_09-24-30.xml</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+</body>
+</html>
