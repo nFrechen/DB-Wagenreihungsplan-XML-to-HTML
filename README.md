@@ -1,6 +1,6 @@
 # Visualisierung der DB-Wagenreihungspläne aus offenen Datensätzen im XML-Format
 
-### ➟ direkt zur [Demo](http://n-dim.de/DB-Wagenreihungsplan-XML-to-HTML/BGS_2016-06-04_16-28-18.xml)
+### ➟ direkt zur [Demo](http://n-dim.de/DB-Wagenreihungsplan-XML-to-HTML/Wagenreihung_datatable.html)
 
 Auf [http://data.deutschebahn.com](http://data.deutschebahn.com) stellt die Deutsche Bahn einige ihrer internen Datensätze als Open Data zur Verfügung. So zum Beispiel eine [xml-Datei, die die Daten zu den Wagenreihungsplänen](http://data.deutschebahn.com/dataset/data-wagenreihungsplan-soll-daten) enthält, die an vielen Fernverkehrsbahnhöfen hängen, wie z.B. dieser hier:
 
@@ -12,6 +12,10 @@ XML-Datei mittels eines Tamplates eine HTML-Seite generieren. Das habe ich in di
 ![DB-Wagenreihung-test](DB-Wagenreihung-test.png)
 
 Dieses Repository enthält einen Beispieldatensatz [BGS_2016-06-04_16-28-18.xml](https://github.com/nFrechen/DB-Wagenreihungsplan-XML-to-HTML/blob/master/BGS_2016-06-04_16-28-18.xml), der mit dem XSL-Stylesheet [wagenreihung.xsl](https://github.com/nFrechen/DB-Wagenreihungsplan-XML-to-HTML/blob/master/wagenreihung.xsl) im Browser in eine HTML-Datei umgewandelt wird, wie sie  [hier](http://n-dim.de/DB-Wagenreihungsplan-XML-to-HTML/BGS_2016-06-04_16-28-18.xml) zu sehen ist.
+
+Mittlerweile haben wir eine Version geschrieben, mit der man sich alle verfügbaren Wagenreihungspläne für alle deutschen Bahnhöfe anzeigen lassen kann. Hier wird die Anwendung des XSL-Stylesheets über Javascript realisiert. [Hier](http://n-dim.de/DB-Wagenreihungsplan-XML-to-HTML/Wagenreihung.html) gehts zur Demo. Es gibt auch noch eine [Version mit durchsuchbarer Tabelle](http://n-dim.de/DB-Wagenreihungsplan-XML-to-HTML/Wagenreihung_datatable.html) (mittels [datatable](https://datatables.net/)).
+
+Leider ist es im Moment (Januar 2019) nicht mehr möglich, neue Datensätze von [data.deutschebahn.com](http://data.deutschebahn.com) herunterzuladen. Schon 2018 wurden keine neuen Datensätze hochgeladen und nun scheint der Download auch der vorhandenen Datensätze gesperrt zu sein. Daher sind die hier gezeigten Wagenreihungspläne leider veraltet.
 
 ## Was noch zu ändern wäre:
 
