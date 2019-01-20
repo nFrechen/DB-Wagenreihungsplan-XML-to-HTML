@@ -1,0 +1,51 @@
+---
+output: 
+  html_document: 
+    css: main.css
+    self_contained: no
+---
+
+<a id="back-to-overview" onclick="hide_wgr()" style="display:none;"><< Zurück zur Übersicht</a>
+
+<div id="wgr"></div>
+<div id="data_table">
+
+# Übersicht Stationen
+
+Datenquelle: <a href="https://data.deutschebahn.com/dataset/data-stationsdaten", target="_blank">data.deutschebahn.com/dataset/data-stationsdaten</a>
+
+</br>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning=F, message=F)
+```
+
+```{r}
+library(knitr)
+library(readr)
+library(dplyr)
+library(stringr)
+library(DT)
+
+
+stations <- read_delim("../DBSuS-Uebersicht_Bahnhoefe-Stand2016-07.csv", delim = ";")
+files <- list.files("../Wagenreihungsplan_RawData_20160617")
+
+file_stations <- tibble(
+  `Bf DS 100 Abk.` = str_extract(files, pattern = "[^_]+"),
+  link = paste0('<a onclick="Init(\'Wagenreihungsplan_RawData_20160617/', files, '\')">', files, "</a>")
+)
+  
+stations_with_file <- right_join(stations, file_stations)
+
+#which(is.na(stations_with_file$Bundesland))
+
+kable(stations_with_file, filter="none", escape=F, elementId = "dt_table")
+
+```
+
+</div>
+
+<script src="loadXML.js"></script>
+
+
