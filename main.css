@@ -46,6 +46,7 @@ body{
   position: relative;
   display: inline-block;
   text-align: center;
+  vertical-align: bottom;
   background: green;
   padding: 2px 2px;
   margin: 2px;
