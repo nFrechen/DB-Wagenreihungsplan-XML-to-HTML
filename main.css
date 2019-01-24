@@ -89,6 +89,15 @@ body{
   background-size: 100% auto;
   background-repeat: no-repeat;
   vertical-align: bottom;
+  margin-right: 0px;
+  padding-right: 0px;
+  heigth:40px;
+  background-clip: padding-box;
+}
+.Triebwagen + .waggon{
+  width: 25px;
+  padding-left:0px;
+  margin-left: 0px;
 }
 .bistro{
   background: orange;
