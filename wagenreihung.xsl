@@ -51,6 +51,8 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
         <th>Zeit</th>
         <th>Zug</th>
         <th>Richtung</th>
+        <th>Wagen</th>
+        <th>Zusatzinfo</th>
       </tr>
       <xsl:apply-templates select="trains/train"/>
     </table>
@@ -62,7 +64,6 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 <xsl:template match="train">
   <tr class="traintime">
     <td class="time"><xsl:apply-templates select="time"/></td>
-    <!--<span class="additionalText"><xsl:value-of select="additionalText"/></span>-->
     <td>
       <xsl:for-each select="traintypes/traintype">
         <xsl:variable name="pos" select="position()"/>
@@ -71,10 +72,25 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
         <xsl:if test="position() != last()"><br/></xsl:if>
       </xsl:for-each>
     </td>
+    <td>
+      <xsl:for-each select="subtrains/subtrain">
+        <span class="destination">
+          <span class="via">
+            <xsl:for-each select="destination/destinationVia/item">
+              <span><xsl:value-of select="."/></span>
+            </xsl:for-each>
+          </span>
+          <span class="destinationName"><xsl:apply-templates select="destination/destinationName"/></span>
+        </span>
+      </xsl:for-each>
+    </td>
     <td class="train">
       <xsl:apply-templates select="waggons/waggon"/>
     </td>
-    
+    <td>
+      <span class="additionalText"><xsl:apply-templates select="additionalText"/></span>
+    </td>
+
   </tr>
 </xsl:template>
 

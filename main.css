@@ -22,6 +22,11 @@ body{
 }
 .traintimes{
   width: 500px;
+  border-collapse: separate;
+  border-spacing: 2px;
+}
+.traintimes th{
+  text-align: center;
 }
 .traintime{
   overflow: scroll;
@@ -41,6 +46,23 @@ body{
 }
 .time::after{
   content: '\00a0';
+}
+.destination{
+  display: block;
+}
+.destinationName{
+  font-weight: 600;
+}
+.destination .via{
+  font-size: 9pt;
+}
+.destination .via span{
+  display: block;
+}
+.additionalText{
+  font-size: 9pt;
+  display: inline-block;
+  white-space: pre;
 }
 .trainNumber::after{
   content: '\00a0';
