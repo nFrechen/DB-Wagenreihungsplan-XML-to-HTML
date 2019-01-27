@@ -1,6 +1,9 @@
 body{
   font-family: 'Open Sans', 'Arial', 'Verdana', 'Sans Serif';
 }
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6{
+  font-weight: 600;
+}
 #header{
 }
 .track{
@@ -16,9 +19,12 @@ body{
 }
 .DS100{
   border: 4px solid black;
+  display: inline-block;
   margin-left: 20px;
-  padding-left: 8px;
-  padding-right: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 1px;
+  padding-bottom: 4px;
 }
 .traintimes{
   width: 500px;
@@ -36,8 +42,9 @@ body{
   vertical-align: middle;
 }
 .traintime td{
-  padding: 5px;
+  padding: 15px;
 }
+
 .traintime:nth-child(even){
   background: #eee;
 }
@@ -78,8 +85,15 @@ body{
   background: green;
   padding: 2px 2px;
   margin: 2px;
-  width: 50px;
-  height: 20px;
+  width: 70px;
+  height: 30px;
+  text-height: 30px;
+  border-radius: 4px 4px 4px 4px;
+}
+.waggon-number{
+  font-size: 12pt;
+  font-weight: 500;
+  color: white;
 }
 .waggon-type{
   color: white;
@@ -106,7 +120,7 @@ body{
 }
 .Triebwagen{
   background-color: transparent;
-  width: 25px;
+  width: 35px;
   background-image: url("Piktogramme/Triebwagen.png");
   background-size: 100% auto;
   background-repeat: no-repeat;
@@ -117,7 +131,7 @@ body{
   background-clip: padding-box;
 }
 .Triebwagen + .waggon{
-  width: 25px;
+  width: 35px;
   padding-left:0px;
   margin-left: 0px;
 }
@@ -135,4 +149,17 @@ body{
   top: -1.3em;
   left: 0;
   width: 100%;
+}
+.waggon-symbols{
+  position:absolute;
+  text-align: center;
+  top: 100%;
+  left:0;
+  width: 100%;
+  font-size: 9pt;
+}
+.symbol a, .symbol a:hover, .symbol a:visited, .symbol a:active, .symbol a:focus{
+  color: gray;
+  text-decoration: none;
+  margin: 2px;
 }
